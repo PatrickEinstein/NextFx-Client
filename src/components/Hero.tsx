@@ -10,7 +10,7 @@ export const Hero = () => {
       <div className="max-w-7xl mx-auto w-full">
         <div className="w-full flex flex-col md:flex-row pt-10 justify-center">
           <div className="w-1/2 text-primary">
-            <h3 className="font-bold text-7xl leading-[80px] pb-4 ">
+            <h3 className="font-extrabold text-7xl leading-[80px] pb-4 font-secularOne tracking-tight">
               Are you Interested in Learning Forex?
             </h3>
             <h3 className="font-bold text-2xl pb-4 px-2 max-w-screen-md">

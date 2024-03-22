@@ -6,8 +6,10 @@ export const ForumOverView = () => {
   return (
     <div className="mt-5 mb-5 justify-center md:w-3/5">
       <div className="shadow-sm shadow-gray-200 w-full p-4">
-        <h2 className="text-secondary font-bold text-2xl">Recent</h2>
-        <h2 className="text-primary font-bold text-4xl tracking-tighter">
+        <h2 className="text-secondary font-bold text-2xl font-secularOne">
+          Recent
+        </h2>
+        <h2 className="text-primary font-bold text-4xl font-secularOne">
           Forum Activity
         </h2>
         <h2 className="text-base tracking-tighter">
