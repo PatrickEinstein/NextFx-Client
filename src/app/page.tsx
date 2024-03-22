@@ -1,3 +1,4 @@
+import Footer from "@/components/NewFooter";
 import {
   Navbar,
   Hero,
@@ -5,24 +6,27 @@ import {
   NewsBlogsBox,
   ForumOverView,
   Calendar,
+  New,
 } from "../components";
 
 export default function Home() {
   return (
-    <div className="min-w-screen overflow-x-hidden">
+    <div className="min-w-screen overflow-x-hidden font-monoSans">
       <Navbar />
       <Hero />
-      <div className="flex w-full mt-10 gap-4 pl-3 pr-6">
-        <div className="w-full md:w-9/12">
-          <AdminBlogs />
-          <NewsBlogsBox />
-        </div>
+      <div className="flex w-full mt-10 gap-4 max-w-7xl mx-auto items-center justify-center">
+        {/* <div className="w-full md:w-9/12"> */}
+        <New />
+        {/* <AdminBlogs /> */}
+        {/* <NewsBlogsBox /> */}
+        {/* </div> */}
         <div className="hidden md:flex md:font-bold md: text-black text-wrap w-3/12 overflow-hidden"></div>
       </div>
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row max-w-7xl mx-auto px-4 md:px-0 pb-8">
         <ForumOverView />
         <Calendar />
       </div>
+      <Footer />
     </div>
   );
 }

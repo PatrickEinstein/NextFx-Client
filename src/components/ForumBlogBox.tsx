@@ -16,8 +16,8 @@ export const ForumBlogBox = ({
   replies,
 }: Props) => {
   return (
-    <div className="flex justify-center w-full">
-      <button className="text-gray-800 hover:text-white focus:outline-lime-300 w-50 h-20">
+    <div className="flex items-start justify-start w-full py-2 px-4 gap-3">
+      <button className="text-gray-800 hover:text-white focus:outline-lime-300 w-50 pt-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

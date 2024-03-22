@@ -8,3 +8,4 @@ export * from "./ForumBlogBox";
 export * from "./ForumOverview";
 export * from "./Calendar";
 export * from "./CalenderBox";
+export * from "./New";

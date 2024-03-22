@@ -1,34 +1,32 @@
 "use client";
 
 import React from "react";
-import Logo from "../../public/FX-nobg.png";
+import Logo from "../../public/HeroPic.svg";
 import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <div className=" bg-slate-900 justify-center align-middle">
-      <div className="flex flex-col md:flex-row bg-slate-900 h-screen/2 pt-10 justify-center">
-        <div className="h-80 w-96">
-          <h3 className="text-white font-bold text-4xl pb-4 ">
-            Are you Interested in Learning Forex?
-          </h3>
-          <h3 className="text-white font-bold text-2xl pb-4 px-2 max-w-screen-md">
-            Learn how to trade forex with our School of WebPips. It is the
-            complete beginner&apos;s guide to forex trading.
-          </h3>
-          <button className="h-12 w-40 rounded-3xl bg-yellow-300 font-bold ">
-            Get Started
-          </button>
-        </div>
-        <div className="h-80  w-screen/2 flex ">
-          <Image
-            src={Logo}
-            alt="Logo"
-            className="w-full max-h-screen/2 object-cover"
-          />
+    <div className=" bg-secondary justify-center align-middle py-[40px] lg:py-[90px] px-5 bg-heroImg">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="w-full flex flex-col md:flex-row pt-10 justify-center">
+          <div className="w-1/2 text-primary">
+            <h3 className="font-bold text-7xl leading-[80px] pb-4 ">
+              Are you Interested in Learning Forex?
+            </h3>
+            <h3 className="font-bold text-2xl pb-4 px-2 max-w-screen-md">
+              Learn how to trade forex with our School of WebPips. It is the
+              complete beginner&apos;s guide to forex trading.
+            </h3>
+            <button className="h-12 w-40 rounded-3xl bg-primary font-bold text-white">
+              Get Started
+            </button>
+          </div>
+          <div className="w-1/2">
+            <Image src={Logo} alt="Logo" className="h-[400px]" />
+          </div>
         </div>
       </div>
-      <div className="flex justify-between w-screen align-middle px-96 py-10">
+      {/* <div className="flex justify-between w-screen align-middle px-96 py-10">
         <button className="text-gray-300 hover:text-white focus:outline-none">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +59,7 @@ export const Hero = () => {
             />
           </svg>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
