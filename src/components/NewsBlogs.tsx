@@ -1,17 +1,18 @@
 "use client";
-
 import React, { useCallback, useEffect, useState } from "react";
 import { NewsBlogsBox } from "./NewsBlogsBox";
 import { CurrencyNews } from "../../utils/fetches/api.fetch";
-import { NewsBlogsPosts } from "../../constants";
 
 export const NewBlogs = () => {
   const [news, SetNews] = useState([]);
-
+  let load = {
+    page: 1,
+    pageSize: 10,
+  };
   const newsGot = useCallback(async () => {
-    const newNews = await CurrencyNews();
-    console.log(`news==>`, newNews?.data?.news);
-    SetNews(newNews?.data?.news);
+    const newNews = await CurrencyNews(load);
+    console.log(`news==>`, newNews?.message);
+    SetNews(newNews?.message);
   }, []);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export const NewBlogs = () => {
             article_photo_url,
             post_time_utc,
             article_url,
-            image,
+            picture,
           },
           index: number
         ) => (
@@ -37,7 +38,7 @@ export const NewBlogs = () => {
             <NewsBlogsBox
               description={description}
               title={article_title}
-              image={article_photo_url}
+              image={picture}
               // image={image}
               article_url={article_url}
               post_time_utc={post_time_utc}

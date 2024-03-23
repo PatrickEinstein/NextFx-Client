@@ -1,8 +1,24 @@
-import React from "react";
+'use client'
+import React, { useCallback, useEffect, useState } from "react";
 import { ForumBlogBox } from "./ForumBlogBox";
-import { Forums } from "../../constants";
+import { Threads } from "../../utils/fetches/api.fetch";
 
 export const ForumOverView = () => {
+  const [forum, SetForum] = useState([]);
+  let load = {
+    page: 1,
+    pageSize: 10,
+  };
+  const ForumGot = useCallback(async () => {
+    const newForum = await Threads(load);
+    console.log(`newForum==>`, newForum.message);
+    SetForum(newForum.message);
+  }, []);
+
+  useEffect(() => {
+    ForumGot();
+  }, []);
+
   return (
     <div className="mt-5 mb-5 justify-center md:w-3/5">
       <div className="shadow-sm shadow-gray-200 w-full p-4">
@@ -15,15 +31,22 @@ export const ForumOverView = () => {
         </h2>
       </div>
       <div className="grid md:grid-cols-2 gap-2 md:gap-2 pt-4">
-        {Forums.map(
-          ({ title, lastAuthor, thread, views, replies }, index: number) => (
+        {forum.map(
+          (
+            {
+              forum: { _id, title, picture, description, createdAt },
+              replies: { forumId, author = "PAT", content, views = 10 },
+              repliesNumber,
+            },
+            index: number
+          ) => (
             <div key={index}>
               <ForumBlogBox
                 title={title}
-                lastAuthor={lastAuthor}
-                thread={thread}
+                lastAuthor={author}
+                thread={description}
                 views={views}
-                replies={replies}
+                replies={repliesNumber}
               />
             </div>
           )
