@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useCallback, useEffect, useState } from "react";
 import { ForumBlogBox } from "./ForumBlogBox";
 import { Threads } from "../../utils/fetches/api.fetch";
@@ -12,6 +12,9 @@ export const ForumOverView = () => {
   const ForumGot = useCallback(async () => {
     const newForum = await Threads(load);
     console.log(`newForum==>`, newForum.message);
+    if (newForum.message === "Failed to fetch") {
+      return;
+    }
     SetForum(newForum.message);
   }, []);
 
