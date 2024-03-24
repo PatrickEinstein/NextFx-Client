@@ -9,3 +9,4 @@ export * from "./ForumOverview";
 export * from "./Calendar";
 export * from "./CalenderBox";
 export * from "./New";
+export * from "./CoursesOverview";

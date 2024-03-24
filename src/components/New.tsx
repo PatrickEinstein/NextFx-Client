@@ -13,6 +13,9 @@ export const New = () => {
   const newsGot = useCallback(async () => {
     const newNews = await CurrencyNews(load);
     console.log(`news==>`, newNews?.message);
+    if (newNews?.message === "Failed to fetch") {
+      return;
+    }
     SetNews(newNews?.message.slice(0, 5));
   }, []);
 
@@ -31,7 +34,7 @@ export const New = () => {
           </p>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {news.map(
+          {news?.map(
             (
               {
                 name,
@@ -101,7 +104,7 @@ export const New = () => {
                       <p className="font-semibold text-gray-900">
                         {/* <a href={post.author.href}> */}
                         {/* <a href={post.author.href}> */}
-                        <a >
+                        <a>
                           <span className="absolute inset-0" />
                           PATRICK
                         </a>
