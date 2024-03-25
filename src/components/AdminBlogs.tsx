@@ -7,9 +7,12 @@ import { AdminBlogsPosts } from "../../constants";
 
 export const AdminBlogs = () => {
   const [news, SetNews] = useState([]);
-
+  const load = {
+    page:1,
+    pageSize:10
+  };
   const newsGot = useCallback(async () => {
-    const newNews = await CurrencyTechnicalAnalysis();
+    const newNews = await CurrencyTechnicalAnalysis(load);
     SetNews(newNews);
   }, []);
 
