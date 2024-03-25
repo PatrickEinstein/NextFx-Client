@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         monoSans: ["DM Mono", "monospace"],
+        secularOne: ["Secular One", "sans-serif"],
       },
       colors: {
         primary: "#142C44",

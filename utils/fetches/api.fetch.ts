@@ -1,7 +1,6 @@
 import { HttpGetCallerWhole } from "../index";
 
-const baseUrl = "http://localhost:5000";
-
+const baseUrl = "http://localhost:8055";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(

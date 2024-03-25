@@ -7,6 +7,7 @@ import {
   ForumOverView,
   Calendar,
   New,
+  CoursesOverview,
 } from "../components";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
         <ForumOverView />
         <Calendar />
       </div>
+      <CoursesOverview />
       <Footer />
     </div>
   );

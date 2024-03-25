@@ -13,6 +13,9 @@ export const New = () => {
   const newsGot = useCallback(async () => {
     const newNews = await CurrencyNews(load);
     console.log(`news==>`, newNews?.message);
+    if (newNews?.message === "Failed to fetch") {
+      return;
+    }
     SetNews(newNews?.message.slice(0, 5));
   }, []);
 
@@ -101,7 +104,7 @@ export const New = () => {
                       <p className="font-semibold text-gray-900">
                         {/* <a href={post.author.href}> */}
                         {/* <a href={post.author.href}> */}
-                        <a >
+                        <a>
                           <span className="absolute inset-0" />
                           PATRICK
                         </a>
