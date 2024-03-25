@@ -1,6 +1,6 @@
 import { HttpGetCallerWhole } from "../index";
 
-const baseUrl = "http://localhost:8055";
+const baseUrl = "http://localhost:5000";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
@@ -12,7 +12,6 @@ export const CalendarNews = async () => {
   );
   return res;
 };
-
 
 type Props = {
   page: number;
@@ -39,6 +38,15 @@ export const CurrencyNews = async ({ page, pageSize }: Props) => {
 export const Threads = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllThreads/${page}/${pageSize}`,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+  return res;
+};
+export const Courses = async ({ page, pageSize }: Props) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
     {
       "Content-Type": "application/json",
     }
