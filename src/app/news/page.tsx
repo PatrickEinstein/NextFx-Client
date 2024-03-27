@@ -1,6 +1,6 @@
 'use client'
 import React, { useCallback, useEffect, useState } from "react";
-import { CurrencyNews } from "../../../utils/fetches/api.fetch";
+import { CurrencyNews, CurrencyTechnicalNews } from "../../../utils/fetches/api.fetch";
 
 const NEWS = () => {
   const [news, SetNews] = useState([]);
@@ -9,7 +9,7 @@ const NEWS = () => {
     pageSize: 10,
   };
   const newsGot = useCallback(async () => {
-    const newNews = await CurrencyNews(load);
+    const newNews = await CurrencyTechnicalNews(load);
     console.log(`Analysis==>`, newNews?.message);
     if (newNews?.message === "Failed to fetch") {
       return;

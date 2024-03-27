@@ -20,9 +20,19 @@ type Props = {
   page: number;
   pageSize: number;
 };
-export const CurrencyTechnicalAnalysis = async ({ page, pageSize }: Props) => {
+export const CurrencyTechnicalNews = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllNews/${page}/${pageSize}`,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+  return res;
+};
+
+export const CurrencyTechnicalAnalysis = async ({ page, pageSize }: Props) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/api/resources/getAllAnalyses/${page}/${pageSize}`,
     {
       "Content-Type": "application/json",
     }

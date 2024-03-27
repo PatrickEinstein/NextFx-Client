@@ -11,7 +11,7 @@ const AnalysesPage = () => {
     pageSize: 10,
   };
   const newsGot = useCallback(async () => {
-    const newNews = await CurrencyNews(load);
+    const newNews = await CurrencyTechnicalAnalysis(load);
     console.log(`Analysis==>`, newNews?.message);
     if (newNews?.message === "Failed to fetch") {
       return;
