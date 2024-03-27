@@ -6,6 +6,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "../../constants";
 import Logo from "../../public/FX.jpeg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Navbar = () => {
   // return (

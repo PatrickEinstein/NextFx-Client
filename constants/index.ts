@@ -1,7 +1,7 @@
 import FXRate from "../public/Fx-rate.webp";
 import FXind from "../public/fx-ind.webp";
 
-export  const forexCourses = [
+export const forexCourses = [
   {
     name: "Forex Fundamentals",
     students: 100,
@@ -35,7 +35,6 @@ export  const forexCourses = [
     price: 299.99,
   },
 ];
-
 
 export const AdminBlogsPosts = [
   {
@@ -168,39 +167,39 @@ export const NewsBlogsPosts = [
 export const NavLink = [
   {
     name: "ANALYSIS",
-    link: "ANALYSIS",
+    link: "analysis",
   },
   {
     name: "NEWS",
-    link: "NEWS",
+    link: "news",
   },
   {
     name: "TRADING",
-    link: "TRADING",
+    link: "trading",
   },
   {
     name: "LEARN FOREX",
-    link: "LEARN FOREX",
+    link: "learn_forex",
   },
   {
     name: "LEARN CRYTO",
-    link: "LEARN CRYTO",
+    link: "learn-crypto",
   },
   {
     name: "FORUMS",
-    link: "FORUMS",
+    link: "forums",
   },
   {
     name: "CALENDAR",
-    link: "CALENDAR",
+    link: "calendar",
   },
   {
     name: "TOOLS",
-    link: "TOOLS",
+    link: "tools",
   },
   {
     name: "MarketMilk",
-    link: "MarketMilk",
+    link: "market-milk",
   },
 ];
 export const posts = [

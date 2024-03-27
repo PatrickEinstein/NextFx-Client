@@ -1,3 +1,5 @@
+"use client";
+
 import { HttpGetCallerWhole } from "../index";
 
 // const baseUrl = "http://localhost:5000";
@@ -18,7 +20,7 @@ type Props = {
   page: number;
   pageSize: number;
 };
-export const CurrencyTechnicalAnalysis = async ({ page, pageSize }: Props) => {
+export const CurrencyTechnicalNews = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllNews/${page}/${pageSize}`,
     {
@@ -27,6 +29,17 @@ export const CurrencyTechnicalAnalysis = async ({ page, pageSize }: Props) => {
   );
   return res;
 };
+
+export const CurrencyTechnicalAnalysis = async ({ page, pageSize }: Props) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/api/resources/getAllAnalyses/${page}/${pageSize}`,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+  return res;
+};
+
 export const CurrencyNews = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllNews/${page}/${pageSize}`,
