@@ -2,8 +2,8 @@
 
 import { HttpGetCallerWhole } from "../index";
 
-const baseUrl = "http://localhost:5000";
-// const baseUrl = "https://fxserver.onrender.com";
+// const baseUrl = "http://localhost:5000";
+const baseUrl = "https://fxserver.onrender.com";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
