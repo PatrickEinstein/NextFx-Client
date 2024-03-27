@@ -53,7 +53,7 @@ const NEWS = () => {
       {Items.map(({ title, desc, buttonLink, image }, index) => (
         <div
           key={index}
-          className="flex flex-col lg:flex-row gap-8 md:gap-20 px-8 py-10"
+          className="flex flex-col lg:flex-row lg:gap-8 md:gap-20 px-3 lg:px-8 py-10"
         >
           <div className="h-1/2 w-90">
             <Image src={image} alt="Logo" className="h-[400px]" />
