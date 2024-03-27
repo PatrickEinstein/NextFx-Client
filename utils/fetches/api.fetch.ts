@@ -29,6 +29,7 @@ export const CurrencyTechnicalAnalysis = async ({ page, pageSize }: Props) => {
   );
   return res;
 };
+
 export const CurrencyNews = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllNews/${page}/${pageSize}`,
