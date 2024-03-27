@@ -1,0 +1,44 @@
+{
+    "TKKPG": {
+      "Request": {
+        "Operation": "CreateOrder",
+        "Language": "EN",
+        "Order": {
+            "Merchant2": "Daddydof LTD",
+            "Amount": "10",
+            "Currency": "566",
+            "Description": "This is a live test",
+            "ApproveURL": "/testshopPageReturn.jsp",
+            "CancelURL": "/testshopPageReturn.jsp",
+            "DeclineURL":  "/testshopPageReturn.jsp",
+            "CustomerId":999,
+        
+          "AddParams": {
+            "SubMerchantId": "SubMerchantID123",
+            "SubMerchantName": "SubMerchantName",
+            "SubMerchantCity": "SubMerchantCity",
+            "SubMerchantCountryCode": "US",
+            "SubMerchantPostalCode": "12345",
+            "SubMerchantStreetAddress": "SubMerchantAddress",
+            "Fee": "10.00",
+            "VendorId": "VendorID123",
+            "PaymentParams": "PaymentParams",
+            "SenderName": "SenderName",
+            "ResidentCityInLatin": "ResidentCity",
+            "ResidentCountry": "ResidentCountry",
+            "Address": "Address",
+            "SenderPostalCode": "54321",
+            "purchase": {
+              "Recur": {
+                "removeOnDecline": "true",
+                "period": "Monthly",
+                "endRecur": "2024-12-31",
+                "frequency": "1"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
