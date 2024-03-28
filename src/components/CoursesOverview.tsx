@@ -1,13 +1,14 @@
-'use client'
+"use client";
 import { useCallback, useEffect, useState } from "react";
 import { CoursesBox } from "./CoursesBox";
 import { Courses } from "../../utils/fetches/api.fetch";
 
 export const CoursesOverview = () => {
   const [forexCourses, SetCourses] = useState([]);
+  const coursesTodisplay = forexCourses?.slice(0, 4);
   const load = {
-    page:1,
-    pageSize:10
+    page: 1,
+    pageSize: 10,
   };
   const newsGot = useCallback(async () => {
     const newNews = await Courses(load);
@@ -18,7 +19,7 @@ export const CoursesOverview = () => {
   useEffect(() => {
     newsGot();
   }, []);
- 
+
   return (
     <div className="w-full py-10 px-4 md:px-0">
       <div className="max-w-7xl w-full mx-auto flex flex-col gap-6">
@@ -43,21 +44,26 @@ export const CoursesOverview = () => {
 
         {/*Courses Section*/}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-          {forexCourses.map(({_id, title, description, link, script, createdAt,updatedAt}, index) => (
-            <div key={index}>
-              <CoursesBox
-                name={title}
-                description={description}
-                video={link}
-                script={script}
-                createdAt={createdAt}
-                updatedAt={updatedAt}
-                // price={course.price}
-                // duration={course.duration}
-                // students={course.students}
-              />
-            </div>
-          ))}
+          {coursesTodisplay.map(
+            (
+              { _id, title, description, link, script, createdAt, updatedAt },
+              index
+            ) => (
+              <div key={index}>
+                <CoursesBox
+                  name={title}
+                  description={description}
+                  video={link}
+                  script={script}
+                  createdAt={createdAt}
+                  updatedAt={updatedAt}
+                  // price={course.price}
+                  // duration={course.duration}
+                  // students={course.students}
+                />
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>
