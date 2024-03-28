@@ -28,6 +28,7 @@ export const AdminBlogs = () => {
             title={name}
             image={typeof image === "string" ? image : ""}
           />
+          
         </div>
       ))}
     </div>
