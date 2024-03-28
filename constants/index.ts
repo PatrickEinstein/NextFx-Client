@@ -301,3 +301,243 @@ export const Forums = [
     replies: 2,
   },
 ];
+
+export const coursesList = [
+  {
+    level: "Preschool",
+    courses: [
+      {
+        title: "What is Forex?",
+        description:
+          "Introduction to the foreign exchange market. Understanding the basics of forex trading, including currency pairs, exchange rates, and market participants.",
+        duration: "1 hour",
+        difficulty: "Beginner",
+        prerequisites: [],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+    ],
+  },
+  {
+    level: "Kindergarten",
+    courses: [
+      {
+        title: "Forex Brokers?",
+        description:
+          "Understanding the role of forex brokers in facilitating currency trading. Comparison of different types of brokers, account types, and factors to consider when choosing a broker.",
+        duration: "1.5 hours",
+        difficulty: "Intermediate",
+        prerequisites: ["What is Forex?", "How do you trade forex?"],
+      },
+      {
+        title: "Types of Analysis?",
+        description:
+          "Overview of technical and fundamental analysis techniques used in forex trading. Examination of chart patterns, indicators, economic indicators, and news events.",
+        duration: "2.5 hours",
+        difficulty: "Intermediate",
+        prerequisites: ["What is Forex?", "How do you trade forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+    ],
+  },
+  {
+    level: "Elementary",
+    courses: [
+      {
+        title: "Risk Management in Forex Trading",
+        description:
+          "Understanding and implementing effective risk management strategies in forex trading. Topics include position sizing, stop-loss orders, and managing leverage.",
+        duration: "2 hours",
+        difficulty: "Intermediate",
+        prerequisites: [
+          "What is Forex?",
+          "How do you trade forex?",
+          "Types of Analysis?",
+        ],
+      },
+      {
+        title: "Psychology of Trading",
+        description:
+          "Exploration of the psychological aspects of trading forex. Techniques for managing emotions, maintaining discipline, and developing a trading mindset.",
+        duration: "1.5 hours",
+        difficulty: "Intermediate",
+        prerequisites: [
+          "What is Forex?",
+          "How do you trade forex?",
+          "Types of Analysis?",
+        ],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+    ],
+  },
+  {
+    level: "Middle School",
+    courses: [
+      {
+        title: "Advanced Technical Analysis",
+        description:
+          "In-depth study of advanced technical analysis techniques, including Fibonacci retracements, Elliott Wave theory, and advanced chart patterns.",
+        duration: "3 hours",
+        difficulty: "Advanced",
+        prerequisites: [
+          "What is Forex?",
+          "How do you trade forex?",
+          "Types of Analysis?",
+        ],
+      },
+      {
+        title: "Fundamental Analysis Strategies",
+        description:
+          "Exploration of advanced fundamental analysis methods for forex trading. Analysis of economic indicators, geopolitical events, and central bank policies.",
+        duration: "2.5 hours",
+        difficulty: "Advanced",
+        prerequisites: [
+          "What is Forex?",
+          "How do you trade forex?",
+          "Types of Analysis?",
+        ],
+      },
+    ],
+  },
+  {
+    level: "High School",
+    courses: [
+      {
+        title: "Developing Trading Systems",
+        description:
+          "Creation and testing of automated trading systems for forex markets. Topics include programming strategies, backtesting, and optimization techniques.",
+        duration: "4 hours",
+        difficulty: "Advanced",
+        prerequisites: [
+          "What is Forex?",
+          "How do you trade forex?",
+          "Types of Analysis?",
+          "Advanced Technical Analysis",
+          "Fundamental Analysis Strategies",
+        ],
+      },
+      {
+        title: "Advanced Risk Management",
+        description:
+          "Advanced risk management techniques for forex traders. Hedging strategies, portfolio diversification, and managing extreme market conditions.",
+        duration: "3 hours",
+        difficulty: "Advanced",
+        prerequisites: [
+          "What is Forex?",
+          "How do you trade forex?",
+          "Types of Analysis?",
+          "Risk Management in Forex Trading",
+          "Psychology of Trading",
+        ],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+      {
+        title: "How do you trade forex?",
+        description:
+          "Exploration of the various methods and strategies used in forex trading. Topics include technical and fundamental analysis, risk management, and placing trades.",
+        duration: "2 hours",
+        difficulty: "Beginner",
+        prerequisites: ["What is Forex?"],
+      },
+    ],
+  },
+];

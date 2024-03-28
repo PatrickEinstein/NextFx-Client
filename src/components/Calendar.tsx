@@ -8,12 +8,26 @@ export const Calendar = () => {
   var nowMonth = new Date().getMonth() + 1;
   var nowDay = new Date().getDate();
 
-  const [news, SetNews] = useState([]);
+  const [news, SetNews] = useState([
+    {
+      image: "",
+      dateUtc: "",
+      name: "",
+      party: "",
+      countryCode: "",
+      currencyCode: "",
+      volatility: "",
+      Actual: "",
+      forcast: "",
+      previous: "",
+      consensus: "",
+    },
+  ]);
 
   const newsGot = useCallback(async () => {
-    const newNews = await CalendarNews();
-    console.log(`news==>`, newNews);
-    SetNews(newNews?.symbols);
+    // const newNews = await CalendarNews();
+    // console.log(`news==>`, newNews);
+    // SetNews(newNews?.symbols);
   }, []);
 
   useEffect(() => {
@@ -26,8 +40,12 @@ export const Calendar = () => {
         <h2 className="text-yellow-400 font-bold text-2xl tracking-tighter">
           {nowDay}/{nowMonth}
         </h2>
-        <h2 className="text-primary font-bold text-4xl tracking-tighter">News Calendar</h2>
-        <h2 className="text-base tracking-tighter">Today&apos;s important economic data releases</h2>
+        <h2 className="text-primary font-bold text-4xl tracking-tighter">
+          News Calendar
+        </h2>
+        <h2 className="text-base tracking-tighter">
+          Today&apos;s important economic data releases
+        </h2>
       </div>
       <div className="grid md:grid-cols-1 gap-2 md:gap-2 pt-4">
         {news?.map(

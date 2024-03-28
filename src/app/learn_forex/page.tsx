@@ -4,53 +4,40 @@ import { Courses } from "../../../utils/fetches/api.fetch";
 import glossary from "../../../public/glossary.png";
 import test_yourself from "../../../public/test-yourself.png";
 import school_badge from "../../../public/school-badge.png";
+import Image from "next/image";
+
 
 const Items = [
   {
     title: "HOW TO TRADE FOREX",
     desc: "The School of Pipsology is the most popular forex trading course on planet Earth. Maybe even on Mars. Our online course is made for beginners to help them learn how to trade the currency markets. Did we mention it’s totally free?",
-    buttonLink: "START",
+    buttonLink: "overview",
+    buttonName:"START",
     image: school_badge,
   },
   {
     title: "TRADING QUIZZES",
     desc: "Want to challenge yourself with some fun trading quizzes? Test your knowledge on a variety of market-related topics and learn some new facts along the way! Your brain will love these quizzes as much as your face loves selfies.",
-    buttonLink: "TEST YOURSELF",
+    buttonLink: "test",
+    buttonName:"TEST YOURSELF",
     image: test_yourself,
   },
   {
     title: "GLOSSARY",
     desc: "Forexpedia is the original online forex glossary made specifically for forex traders. Enhancing your trading vocabulary is crucial if you want to able to follow the financial markets. Not only can you use it as a reference, but it’ll help you sound really smart at parties.",
-    buttonLink: "LEARN",
+    buttonLink: "learn",
+    buttonName:"LEARN",
     image: glossary,
   },
 ];
 
-import { forexCourses } from "../../../constants";
-import { CoursesBox } from "@/components/CoursesBox";
-import Image from "next/image";
+
+
 
 const NEWS = () => {
-  const [forexCourses, SetforexCourses] = useState([]);
-  let load = {
-    page: 1,
-    pageSize: 10,
-  };
-  const newsGot = useCallback(async () => {
-    const newNews = await Courses(load);
-    console.log(`Analysis==>`, newNews?.message);
-    if (newNews?.message === "Failed to fetch") {
-      return;
-    }
-    SetforexCourses(newNews?.message.slice(0, 5));
-  }, []);
-
-  useEffect(() => {
-    newsGot();
-  }, []);
   return (
     <div className="w-full">
-      {Items.map(({ title, desc, buttonLink, image }, index) => (
+      {Items.map(({ title, desc, buttonLink, image,buttonName }, index) => (
         <div
           key={index}
           className="flex flex-col lg:flex-row lg:gap-8 md:gap-20 px-3 lg:px-8 py-10"
@@ -67,7 +54,7 @@ const NEWS = () => {
               <h3 className="mt-auto mb-auto text-lg font-semibold leading-6 text-white-900 group-hover:text-gray-600">
                 <a href={buttonLink}>
                   <span className="absolute inset-0" />
-                  {buttonLink}
+                  {buttonName}
                 </a>
               </h3>
             </button>
