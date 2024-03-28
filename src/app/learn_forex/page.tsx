@@ -29,6 +29,8 @@ const Items = [
 import { forexCourses } from "../../../constants";
 import { CoursesBox } from "@/components/CoursesBox";
 import Image from "next/image";
+import { Navbar } from "@/components";
+import Footer from "@/components/NewFooter";
 
 const NEWS = () => {
   const [forexCourses, SetforexCourses] = useState([]);
