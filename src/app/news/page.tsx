@@ -1,6 +1,8 @@
 'use client'
 import React, { useCallback, useEffect, useState } from "react";
 import { CurrencyNews, CurrencyTechnicalNews } from "../../../utils/fetches/api.fetch";
+import Footer from "@/components/NewFooter";
+import { Navbar } from "@/components";
 
 const NEWS = () => {
   const [news, SetNews] = useState([]);
@@ -21,6 +23,7 @@ const NEWS = () => {
     newsGot();
   }, []);
   return (
+
     <div className="bg-white py-10 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-1">
         <div className="mx-auto max-w-2xl text-center">
@@ -118,6 +121,7 @@ const NEWS = () => {
         </div>
       </div>
     </div>
+   
   );
 };
 
