@@ -1,12 +1,12 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,6 +18,21 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        monoSans: ["DM Mono", "monospace"],
+        secularOne: ["Secular One", "sans-serif"],
+      },
+      colors: {
+        primary: "#142C44",
+        secondary: "#FBBE36",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        heroImg:
+          "linear-gradient(rgba(251, 190, 54, 0.9), rgba(251, 190, 54, 0.7)), url('/texture.png')",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -35,6 +50,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
