@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const CoursesOverview = () => {
   const [forexCourses, SetCourses] = useState([]);
-  const coursesTodisplay = forexCourses?.slice(0, 4);
+  const coursesTodisplay = forexCourses?.slice(0,6);
   const load = {
     page: 1,
     pageSize: 10,
@@ -56,6 +56,7 @@ export const CoursesOverview = () => {
                 createdAt,
                 updatedAt,
                 courseId,
+                courseTitle
               },
               index
             ) => (
@@ -68,6 +69,7 @@ export const CoursesOverview = () => {
                     script={script}
                     createdAt={createdAt}
                     updatedAt={updatedAt}
+                    courseTitle={courseTitle}
                     // price={course.price}
                     // duration={course.duration}
                     // students={course.students}
