@@ -2,8 +2,8 @@
 
 import { HttpGetCallerWhole } from "../index";
 
-const baseUrl = "http://localhost:5000";
-// const baseUrl = "https://fxserver.onrender.com";
+// const baseUrl = "http://localhost:5000";
+ const baseUrl = "https://fxserver-1.onrender.com";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
@@ -73,7 +73,6 @@ type ThisCourseAndChapter = {
   courseId : string
 }
 export const GetCourseAndChapters = async ({ courseId }: ThisCourseAndChapter) => {
-  console.log(`id-in-fetches==>`, courseId);
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/course/${courseId}`,
     {

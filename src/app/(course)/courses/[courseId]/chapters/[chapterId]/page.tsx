@@ -23,8 +23,6 @@ const ChapterIdPage = ({
   const load = {
     courseId: courseId,
   };
-
-  console.log(`params`, params);
   const [chapter, setChapter] = useState([]);
   const [muxData, setMuxData] = useState({});
   const [userProgress, setuserProgress] = useState({});
@@ -70,8 +68,6 @@ const ChapterIdPage = ({
   const isLocked = false;
   const completeOnEnd = true;
 
-  console.log(`chapter===>`, chapter);
-  console.log(`content===>`, content);
 
   return (
     <div>
