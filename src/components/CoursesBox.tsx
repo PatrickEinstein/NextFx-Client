@@ -11,6 +11,7 @@ type CourseBoxProps = {
   script?: string;
   createdAt?: string;
   updatedAt?: string;
+  courseTitle?: string;
 };
 
 export const CoursesBox = ({
@@ -23,12 +24,16 @@ export const CoursesBox = ({
   script,
   createdAt,
   updatedAt,
+  courseTitle,
 }: CourseBoxProps) => {
   return (
     <div className="px-4 py-6 rounded-[20px] border border-[#142C44] bg-[#fff] md:h-80">
       <div className="w-full flex flex-col gap-5">
-        <h3 className="text-2xl text-primary font-semibold font-secularOne md:h-20">
-          {name}
+        <h3 className="text-2xl text-primary font-semibold font-secularOne md:h-10">
+          Course Title: {courseTitle}
+        </h3>
+        <h3 className="text-1xl text-primary font-semibold font-secularOne md:h-10">
+          CHapter : {name}
         </h3>
 
         <div className="flex flex-row items-center justify-between text-primary">
@@ -36,7 +41,7 @@ export const CoursesBox = ({
 
           <span className="text-base">{duration}</span>
         </div>
-        <span className="text-base md:h-20">
+        <span className="text-base md:h-15">
           {description && description.length > 100
             ? `${description.substring(0, 100)}...`
             : description}
