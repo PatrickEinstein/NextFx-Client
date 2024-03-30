@@ -13,9 +13,6 @@ export const New = () => {
   const newsGot = useCallback(async () => {
     const newNews = await CurrencyNews(load);
     console.log(`news==>`, newNews?.message);
-    if (newNews?.message === "Failed to fetch") {
-      return;
-    }
     SetNews(newNews?.message.slice(0, 5));
   }, []);
 

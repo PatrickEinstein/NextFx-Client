@@ -2,8 +2,8 @@
 
 import { HttpGetCallerWhole } from "../index";
 
-// const baseUrl = "http://localhost:5000";
-const baseUrl = "https://fxserver.onrender.com";
+const baseUrl = "http://localhost:5000";
+// const baseUrl = "https://fxserver.onrender.com";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
@@ -17,8 +17,10 @@ export const CalendarNews = async () => {
 };
 
 type Props = {
-  page: number;
-  pageSize: number;
+  page?: number;
+  pageSize?: number;
+  courseId?: string;
+  chapterId?: string;
 };
 export const CurrencyTechnicalNews = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
@@ -59,6 +61,29 @@ export const Threads = async ({ page, pageSize }: Props) => {
   return res;
 };
 export const Courses = async ({ page, pageSize }: Props) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/api/resources/getAllCourses/${page}/${pageSize}`,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+  return res;
+};
+type ThisCourseAndChapter = {
+  courseId : string
+}
+export const GetCourseAndChapters = async ({ courseId }: ThisCourseAndChapter) => {
+  console.log(`id-in-fetches==>`, courseId);
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/api/course/${courseId}`,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+  return res;
+};
+
+export const GetSomeCHapters = async ({  page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
     {
