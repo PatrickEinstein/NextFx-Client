@@ -25,7 +25,6 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         isPublished: true,
         isFree: true,
       },
-
       {
         id: "2",
         title: "Variables and Data Types",
@@ -35,7 +34,6 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         isPublished: true,
         isFree: true,
       },
-      // Other chapters for course 1
     ],
     attachments: [
       {
@@ -43,7 +41,6 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         name: "Course Materials",
         url: "https://example.com/materials.pdf",
       },
-      // Other attachments for course 1
     ],
     purchases: [
       {
