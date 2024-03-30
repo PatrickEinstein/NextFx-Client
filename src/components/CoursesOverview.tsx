@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { CoursesBox } from "./CoursesBox";
-import { Courses } from "../../utils/fetches/api.fetch";
+import { Courses, GetSomeCHapters } from "../../utils/fetches/api.fetch";
 
 export const CoursesOverview = () => {
   const [forexCourses, SetCourses] = useState([]);
@@ -11,8 +11,8 @@ export const CoursesOverview = () => {
     pageSize: 10,
   };
   const newsGot = useCallback(async () => {
-    const newNews = await Courses(load);
-    console.log(`news==>`, newNews);
+    const newNews = await GetSomeCHapters(load);
+    console.log(`someChapters==>`, newNews);
     SetCourses(newNews?.message);
   }, []);
 
