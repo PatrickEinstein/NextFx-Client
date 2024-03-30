@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { CoursesBox } from "./CoursesBox";
 import { Courses, GetSomeCHapters } from "../../utils/fetches/api.fetch";
+import Link from "next/link";
 
 export const CoursesOverview = () => {
   const [forexCourses, SetCourses] = useState([]);
@@ -46,21 +47,32 @@ export const CoursesOverview = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
           {coursesTodisplay.map(
             (
-              { _id, title, description, link, script, createdAt, updatedAt },
+              {
+                _id,
+                title,
+                description,
+                link,
+                script,
+                createdAt,
+                updatedAt,
+                courseId,
+              },
               index
             ) => (
               <div key={index}>
-                <CoursesBox
-                  name={title}
-                  description={description}
-                  video={link}
-                  script={script}
-                  createdAt={createdAt}
-                  updatedAt={updatedAt}
-                  // price={course.price}
-                  // duration={course.duration}
-                  // students={course.students}
-                />
+               <Link href={`/courses/${courseId}/chapters/${_id}`}>
+                  <CoursesBox
+                    name={title}
+                    description={description}
+                    video={link}
+                    script={script}
+                    createdAt={createdAt}
+                    updatedAt={updatedAt}
+                    // price={course.price}
+                    // duration={course.duration}
+                    // students={course.students}
+                  />
+                </Link>
               </div>
             )
           )}

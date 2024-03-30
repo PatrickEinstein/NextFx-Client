@@ -23,13 +23,11 @@ const ChapterIdPage = ({
   const load = {
     courseId: courseId,
   };
+  const [chapter, setChapter] = useState([{title:"",description:""}]);
+  const [muxData, setMuxData] = useState({playbackId:"1"});
+  const [userProgress, setuserProgress] = useState([{ isCompleted: false }]);
 
-  console.log(`params`, params);
-  const [chapter, setChapter] = useState([]);
-  const [muxData, setMuxData] = useState({});
-  const [userProgress, setuserProgress] = useState({});
-  
-  const [content, SetCourse] = useState({});
+  const [content, SetCourse] = useState({ chapters: [],price:5 });
   const newsGot = useCallback(async () => {
     try {
       console.log(`I am calling`);
@@ -40,10 +38,10 @@ const ChapterIdPage = ({
     } catch (error: any) {
       // console.error("Error fetching course data:", error.message);
     }
-  }, [courseId,chapterId]);
+  }, [courseId, chapterId]);
   useEffect(() => {
     newsGot();
-  }, [courseId,chapterId]);
+  }, [courseId, chapterId]);
 
   const purchase = false;
 
@@ -62,16 +60,8 @@ const ChapterIdPage = ({
     }
   }, [content, params.chapterId]);
 
-  // const chapter = content.chapters.filter(
-  //   (chapter: any) => chapter._id === params?.chapterId
-  // );
-  // const { muxData, userProgress } = chapter[0];
-
   const isLocked = false;
   const completeOnEnd = true;
-
-  console.log(`chapter===>`, chapter);
-  console.log(`content===>`, content);
 
   return (
     <div>
@@ -88,7 +78,7 @@ const ChapterIdPage = ({
         <div className="p-4">
           <VideoPlayer
             chapterId={params.chapterId}
-            title={chapter?.title!}
+            title={chapter[0]?.title!}
             courseId={params.courseId}
             nextChapterId={"1"}
             playbackId={muxData?.playbackId!}
@@ -98,7 +88,7 @@ const ChapterIdPage = ({
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-2">{chapter?.title}</h2>
+            <h2 className="text-2xl font-semibold mb-2">{chapter[0]?.title}</h2>
             {purchase ? (
               <CourseProgressButton
                 chapterId={params.chapterId}
@@ -115,7 +105,7 @@ const ChapterIdPage = ({
           </div>
           <Separator />
           <div>
-            <Preview value={chapter?.description!} />
+            <Preview value={chapter[0]?.description!} />
           </div>
           {/* {!!content?.attachments.length && (
             <>
