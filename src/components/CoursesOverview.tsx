@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const CoursesOverview = () => {
   const [forexCourses, SetCourses] = useState([]);
-  const coursesTodisplay = forexCourses?.slice(0,6);
+  const coursesTodisplay = forexCourses?.slice(0,4);
   const load = {
     page: 1,
     pageSize: 10,

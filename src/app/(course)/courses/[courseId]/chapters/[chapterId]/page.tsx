@@ -23,11 +23,12 @@ const ChapterIdPage = ({
   const load = {
     courseId: courseId,
   };
-  const [chapter, setChapter] = useState([{title:"",description:""}]);
-  const [muxData, setMuxData] = useState({playbackId:"1"});
+  const [chapter, setChapter] = useState([{ title: "", description: "" }]);
+  const [muxData, setMuxData] = useState({ playbackId: "1" });
   const [userProgress, setuserProgress] = useState([{ isCompleted: false }]);
+  const [content, SetCourse] = useState({ chapters: [], price: 5 });
+  const [documentUrl, setDocumentUrl] = useState("");
 
-  const [content, SetCourse] = useState({ chapters: [],price:5 });
   const newsGot = useCallback(async () => {
     try {
       console.log(`I am calling`);
@@ -57,6 +58,7 @@ const ChapterIdPage = ({
         setMuxData(muxData);
         setuserProgress(userProgress);
       }
+
     }
   }, [content, params.chapterId]);
 
@@ -78,10 +80,11 @@ const ChapterIdPage = ({
         <div className="p-4">
           <VideoPlayer
             chapterId={params.chapterId}
-            title={chapter[0]?.title!}
+            title={content?.chapters[0]?.title}
             courseId={params.courseId}
             nextChapterId={"1"}
-            playbackId={muxData?.playbackId!}
+            // playbackId={muxData?.playbackId!}
+            playbackId={content?.chapters[0]?.link}
             isLocked={isLocked}
             completeOnEnd={completeOnEnd}
           />
@@ -107,11 +110,11 @@ const ChapterIdPage = ({
           <div>
             <Preview value={chapter[0]?.description!} />
           </div>
-          {/* {!!content?.attachments.length && (
+          {content?.chapters[0]?.script.length && (
             <>
               <Separator />
               <div className="p-4">
-                {content?.attachments?.map((attachment: any) => (
+                {/* {content?.attachments?.map((attachment: any) => (
                   <a
                     href={attachment.url}
                     target="_blank"
@@ -121,10 +124,10 @@ const ChapterIdPage = ({
                     <File />
                     <p className="line-clamp-1">{attachment.name}</p>
                   </a>
-                ))}
+                ))} */}
               </div>
             </>
-          )} */}
+          )}
         </div>
       </div>
     </div>
