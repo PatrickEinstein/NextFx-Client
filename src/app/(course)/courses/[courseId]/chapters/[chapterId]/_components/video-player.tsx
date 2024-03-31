@@ -28,6 +28,7 @@ const VideoPlayer = ({
   completeOnEnd,
   title,
 }: VideoPlayerProps) => {
+
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
   // const confetti = useConfettiStore();
@@ -71,14 +72,15 @@ const VideoPlayer = ({
       )}
       {!isLocked && (
         <MuxPlayer
-          title="title"
+          title={title}
           className={cn(!isReady && "hidden")}
           onCanPlay={() => setIsReady(true)}
           onEnded={() => {
             onEnd;
           }}
           autoPlay
-          playbackId={playbackId}
+          src={playbackId}
+          // playbackId={playbackId}
         />
       )}
     </div>
