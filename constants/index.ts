@@ -167,39 +167,39 @@ export const NewsBlogsPosts = [
 export const NavLink = [
   {
     name: "ANALYSIS",
-    link: "analysis",
+    link: "/analysis",
   },
   {
     name: "NEWS",
-    link: "news",
+    link: "/news",
   },
   {
     name: "TRADING",
-    link: "trading",
+    link: "/trading",
   },
   {
     name: "LEARN FOREX",
-    link: "learn_forex",
+    link: "/learn_forex",
   },
   {
     name: "LEARN CRYTO",
-    link: "learn-crypto",
+    link: "/learn-crypto",
   },
   {
     name: "FORUMS",
-    link: "forums",
+    link: "/forums",
   },
   {
     name: "CALENDAR",
-    link: "calendar",
+    link: "/calendar",
   },
   {
     name: "TOOLS",
-    link: "tools",
+    link: "/tools",
   },
   {
     name: "MarketMilk",
-    link: "market-milk",
+    link: "/market-milk",
   },
 ];
 export const posts = [
