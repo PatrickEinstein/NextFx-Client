@@ -10,10 +10,10 @@ import Footer from "@/components/NewFooter";
 //   params: { article: [articleId: string, News: string] };
 // };
 type ViewArticleProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   params: { article: string[] };
 };
-const ViewArticle: React.FC<ViewArticleProps> = ({ params }) => {
+const ViewArticle = ({ params }:ViewArticleProps) => {
   const News = params.article[0];
   const articleId = params.article[1];
 
