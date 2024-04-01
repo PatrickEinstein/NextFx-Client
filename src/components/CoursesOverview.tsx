@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const CoursesOverview = () => {
   const [forexCourses, SetCourses] = useState([]);
-  const coursesTodisplay = forexCourses?.slice(0,6);
+  const coursesTodisplay = forexCourses?.slice(0, 4);
   const load = {
     page: 1,
     pageSize: 10,
@@ -14,6 +14,10 @@ export const CoursesOverview = () => {
   const newsGot = useCallback(async () => {
     const newNews = await GetSomeCHapters(load);
     console.log(`someChapters==>`, newNews);
+
+    if (newNews?.message === "Failed to fetch") {
+      return;
+    }
     SetCourses(newNews?.message);
   }, []);
 
@@ -56,12 +60,12 @@ export const CoursesOverview = () => {
                 createdAt,
                 updatedAt,
                 courseId,
-                courseTitle
+                courseTitle,
               },
               index
             ) => (
               <div key={index}>
-               <Link href={`/courses/${courseId}/chapters/${_id}`}>
+                <Link href={`/courses/${courseId}/chapters/${_id}`}>
                   <CoursesBox
                     name={title}
                     description={description}
