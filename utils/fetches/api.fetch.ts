@@ -70,11 +70,20 @@ export const Courses = async ({ page, pageSize }: Props) => {
   return res;
 };
 type ThisCourseAndChapter = {
-  courseId : string
-}
-export const GetCourseAndChapters = async ({ courseId }: ThisCourseAndChapter) => {
+  courseId: string;
+};
+export const GetCourseAndChapters = async ({
+  courseId,
+}: ThisCourseAndChapter) => {
+  const res = await HttpGetCallerWhole(`${baseUrl}/api/course/${courseId}`, {
+    "Content-Type": "application/json",
+  });
+  return res;
+};
+
+export const GetSomeCHapters = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
-    `${baseUrl}/api/course/${courseId}`,
+    `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
     {
       "Content-Type": "application/json",
     }
@@ -82,9 +91,15 @@ export const GetCourseAndChapters = async ({ courseId }: ThisCourseAndChapter) =
   return res;
 };
 
-export const GetSomeCHapters = async ({  page, pageSize }: Props) => {
+type Article = {
+  article?: string;
+  id?: string;
+};
+
+export const getAnArticle = async ({ article, id }: Article) => {
+  
   const res = await HttpGetCallerWhole(
-    `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
+    `${baseUrl}/get/${article}/${id}`,
     {
       "Content-Type": "application/json",
     }

@@ -20,7 +20,6 @@ const NEWS = () => {
   const newsGot = useCallback(async () => {
     setLoading(true);
     const newNews = await CurrencyTechnicalNews(load);
-    console.log(`Analysis==>`, newNews?.message);
     if (newNews?.message === "Failed to fetch") {
       setLoading(false);
       return;
@@ -85,7 +84,7 @@ const NEWS = () => {
                         </time>
                         <a
                           // href={post.category.href}
-                          href={title}
+                          href={`News/${_id}`}
                           className="relative z-10 rounded-full bg-gray-50 text-2xl px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                         >
                           {/* {post.category.title} */}
