@@ -4,9 +4,16 @@ import school_badge from "../../../public/dash2.png";
 
 const Monitor = () => {
   return (
-    <div className="flex-col justify-center mx-auto my-auto w-screen">
-      <Image src={school_badge} alt="school badge" className="h-[500px] w-[500px]" />
-      <h2>0 of 361 Lessons Completed</h2>
+    <div className="flex flex-col items-center justify-center mx-auto w-full max-w-7xl px-5 lg:px-0 py-7">
+      <Image src={school_badge} alt="school badge" className="" />
+      <div className="flex flex-col gap-3 items-center">
+        <h2 className="text-3xl font-bold mb-">
+          0 <span className="font-normal">of</span> 361
+        </h2>
+        <span className="py-2 px-6 bg-gray-400 text-white rounded-[40px]">
+          Lessons Completed
+        </span>
+      </div>
       <h2>Your Personal Progress</h2>
       <h3>
         One day or day one? You decide. Remember that the best way to get
