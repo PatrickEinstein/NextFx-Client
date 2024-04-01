@@ -43,8 +43,8 @@ export const CourseSidebar = ({
         )} */}
       </div>
       <div className="flex flex-col w-full">
-        {Object.keys(course).length > 0 &&
-          course.chapters.map((chapter: any) => (
+        {Object?.keys(course).length > 0 &&
+          course?.chapters?.map((chapter: any) => (
             <CourseSidebarItem
               key={chapter._id}
               id={chapter._id}

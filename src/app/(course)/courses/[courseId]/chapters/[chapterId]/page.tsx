@@ -27,7 +27,7 @@ const ChapterIdPage = ({
   const [chapter, setChapter] = useState([{ title: "", description: "" }]);
   const [muxData, setMuxData] = useState({ playbackId: "1" });
   const [userProgress, setuserProgress] = useState([{ isCompleted: false }]);
-  const [content, SetCourse] = useState({ chapters: [], price: 5 });
+  const [content, SetCourse] = useState<any>({ chapters: [], price: 5 });
 
   const newsGot = useCallback(async () => {
     try {
@@ -48,21 +48,29 @@ const ChapterIdPage = ({
 
   useEffect(() => {
     if (Object.keys(content).length > 1) {
-      const chapter = content?.chapters.filter(
+      const chapter = content?.chapters?.filter(
         (chapter: any) => chapter._id === params?.chapterId
       );
       setChapter(chapter);
 
-      if (chapter.length > 0) {
+      if (chapter?.length > 0) {
         const { muxData, userProgress } = chapter[0];
         setMuxData(muxData);
         setuserProgress(userProgress);
       }
     }
   }, [content, params.chapterId]);
+  const scriptUri =
+    content &&
+    content.chapters &&
+    content.chapters[0] &&
+    content.chapters[0].script;
   const docs = [
-    { uri: content?.chapters[0]?.script }, // Remote file
+    { uri: scriptUri }, // Remote file
   ];
+  // const docs = [
+  //   { uri: content?.chapters[0]?.script }, // Remote file
+  // ];
 
   const isLocked = false;
   const completeOnEnd = true;
@@ -82,18 +90,22 @@ const ChapterIdPage = ({
         <div className="p-4">
           <VideoPlayer
             chapterId={params.chapterId}
-            title={content?.chapters[0]?.title}
+            title={content?.chapters?.length ? content?.chapters[0]?.title : ""}
             courseId={params.courseId}
             nextChapterId={"1"}
             // playbackId={muxData?.playbackId!}
-            playbackId={content?.chapters[0]?.link}
+            playbackId={
+              content?.chapters?.length ? content?.chapters[0]?.link : ""
+            }
             isLocked={isLocked}
             completeOnEnd={completeOnEnd}
           />
         </div>
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-2">{chapter[0]?.title}</h2>
+            <h2 className="text-2xl font-semibold mb-2">
+              {chapter?.length && chapter[0]?.title}
+            </h2>
             {purchase ? (
               <CourseProgressButton
                 chapterId={params.chapterId}
@@ -110,13 +122,17 @@ const ChapterIdPage = ({
           </div>
           <Separator />
           <div>
-            <Preview value={chapter[0]?.description!} />
+            <Preview
+              value={chapter?.length > 0 ? chapter[0]?.description! : ""}
+            />
           </div>
-          {content?.chapters[0]?.script.length && (
-            <>
-              <Separator />
-              <div className="p-4">
-                {/* {content?.attachments?.map((attachment: any) => ( */}
+          {content &&
+            content.chapters &&
+            content?.chapters[0]?.script?.length && (
+              <>
+                <Separator />
+                <div className="p-4">
+                  {/* {content?.attachments?.map((attachment: any) => ( */}
                   <a
                     href={content?.chapters[0]?.script}
                     target="_blank"
@@ -124,16 +140,18 @@ const ChapterIdPage = ({
                     className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline"
                   >
                     <File />
-                    <p className="line-clamp-1">{content?.chapters[0]?.title}</p>
+                    <p className="line-clamp-1">
+                      {content?.chapters[0]?.title}
+                    </p>
                   </a>
-                {/* ))} */}
-                <DocViewer
-                  documents={docs}
-                  pluginRenderers={DocViewerRenderers}
-                />
-              </div>
-            </>
-          )}
+                  {/* ))} */}
+                  <DocViewer
+                    documents={docs}
+                    pluginRenderers={DocViewerRenderers}
+                  />
+                </div>
+              </>
+            )}
         </div>
       </div>
     </div>
