@@ -13,7 +13,7 @@ type ViewArticleProps = {
   children?: React.ReactNode;
   params: { article: string[] };
 };
-const ViewArticle = ({ params }:ViewArticleProps) => {
+const ViewArticlePage = ({ params }:ViewArticleProps) => {
   const News = params.article[0];
   const articleId = params.article[1];
 
@@ -117,4 +117,4 @@ const ViewArticle = ({ params }:ViewArticleProps) => {
   );
 };
 
-export default ViewArticle;
+export default ViewArticlePage;
