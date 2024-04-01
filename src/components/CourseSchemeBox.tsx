@@ -19,7 +19,9 @@ const CourseSchemeBox = ({ course, level, indexNum }: props) => {
       <div className="flex flex-col">
         <Image src={school_badge} alt="school badge" className="h-[500px]" />
         <div className="flex flex-col">
-          <h2>Course ParseInt({indexNum}) + 1 of 11</h2>
+          <h2>
+            Course {Number(indexNum) + Number(1) } of 11
+          </h2>
           <h2>{level}</h2>
           <h2>
             Currency trading? Forex trading? FX trading? Totally clueless about
