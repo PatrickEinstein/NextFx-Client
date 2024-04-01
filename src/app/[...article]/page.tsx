@@ -5,11 +5,14 @@ import { getAnArticle } from "../../../utils/fetches/api.fetch";
 import { Navbar } from "@/components";
 import Footer from "@/components/NewFooter";
 
+// type ViewArticleProps = {
+//   children: React.ReactNode;
+//   params: { article: [articleId: string, News: string] };
+// };
 type ViewArticleProps = {
   children: React.ReactNode;
-  params: { article: [articleId: string, News: string] };
+  params: { article: string[] };
 };
-
 const ViewArticle: React.FC<ViewArticleProps> = ({ params }) => {
   const News = params.article[0];
   const articleId = params.article[1];
