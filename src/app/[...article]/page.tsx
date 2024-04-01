@@ -9,7 +9,7 @@ const ViewArticle = ({
   params,
 }: {
   children: React.ReactNode;
-  params: { News: string; articleId: string };
+  params: { article: [articleId:string, News:string] };
 }) => {
   const News = params.article[0];
   const articleId = params.article[1];
