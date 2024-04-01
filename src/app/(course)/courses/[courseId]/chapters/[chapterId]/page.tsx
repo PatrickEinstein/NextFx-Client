@@ -31,11 +31,11 @@ const ChapterIdPage = ({
 
   const newsGot = useCallback(async () => {
     try {
-      console.log(`I am calling`);
+      // console.log(`I am calling`);
       const newNews = await GetCourseAndChapters(load);
       // console.log(`courseContent==>`, newNews.message);
       SetCourse(newNews?.message);
-      console.log(`I called`);
+      // console.log(`I called`);
     } catch (error: any) {
       // console.error("Error fetching course data:", error.message);
     }
@@ -115,7 +115,7 @@ const ChapterIdPage = ({
           {content?.chapters[0]?.script.length && (
             <>
               <Separator />
-              <div className="p-4">
+              <div className="p-4 h-[500]">
                 {/* {content?.attachments?.map((attachment: any) => ( */}
                   <a
                     href={content?.chapters[0]?.script}

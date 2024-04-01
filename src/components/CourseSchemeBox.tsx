@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import school_badge from "../../public/badge2.png";
 import play from "../../public/play.svg";
 
@@ -10,15 +10,16 @@ type course = {
 type props = {
   course: Array<course>;
   level: string;
+  indexNum?: number;
 };
 
-const CourseSchemeBox = ({ course, level }: props) => {
+const CourseSchemeBox = ({ course, level, indexNum }: props) => {
   return (
     <div>
       <div className="flex flex-col">
         <Image src={school_badge} alt="school badge" className="h-[500px]" />
         <div className="flex flex-col">
-          <h2>Course 1 of 11</h2>
+          <h2>Course ParseInt({indexNum}) + 1 of 11</h2>
           <h2>{level}</h2>
           <h2>
             Currency trading? Forex trading? FX trading? Totally clueless about
@@ -39,7 +40,7 @@ const CourseSchemeBox = ({ course, level }: props) => {
           <h2>Course Outline</h2>
           {course.map(({ title }, index) => (
             <div key={index} className="flex flex-row gap-8">
-              <Image src={play} alt="play" className="h-[50px]"/>
+              <Image src={play} alt="play" className="h-[50px]" />
               <h4>{title}</h4>
             </div>
           ))}
