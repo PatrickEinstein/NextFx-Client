@@ -12,6 +12,7 @@ import VideoPlayer from "./_components/video-player";
 import CourseEnrollButton from "./_components/course-enroll-button";
 import CourseProgressButton from "./_components/course-progress-button";
 import { GetCourseAndChapters } from "../../../../../../../utils/fetches/api.fetch";
+import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 // import { CourseProgressButton } from "./_components/course-progress-button";
 
 const ChapterIdPage = ({
@@ -27,7 +28,6 @@ const ChapterIdPage = ({
   const [muxData, setMuxData] = useState({ playbackId: "1" });
   const [userProgress, setuserProgress] = useState([{ isCompleted: false }]);
   const [content, SetCourse] = useState<any>({ chapters: [], price: 5 });
-  const [documentUrl, setDocumentUrl] = useState("");
 
   const newsGot = useCallback(async () => {
     try {
@@ -60,6 +60,17 @@ const ChapterIdPage = ({
       }
     }
   }, [content, params.chapterId]);
+  const scriptUri =
+    content &&
+    content.chapters &&
+    content.chapters[0] &&
+    content.chapters[0].script;
+  const docs = [
+    { uri: scriptUri }, // Remote file
+  ];
+  // const docs = [
+  //   { uri: content?.chapters[0]?.script }, // Remote file
+  // ];
 
   const isLocked = false;
   const completeOnEnd = true;
@@ -115,22 +126,29 @@ const ChapterIdPage = ({
               value={chapter?.length > 0 ? chapter[0]?.description! : ""}
             />
           </div>
-          {content?.chapters?.length > 0 &&
-            content?.chapters[0]?.script.length && (
+          {content &&
+            content.chapters &&
+            content?.chapters[0]?.script?.length && (
               <>
                 <Separator />
                 <div className="p-4">
-                  {/* {content?.attachments?.map((attachment: any) => (
+                  {/* {content?.attachments?.map((attachment: any) => ( */}
                   <a
-                    href={attachment.url}
+                    href={content?.chapters[0]?.script}
                     target="_blank"
-                    key={attachment.id}
+                    // key={attachment.id}
                     className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-md hover:underline"
                   >
                     <File />
-                    <p className="line-clamp-1">{attachment.name}</p>
+                    <p className="line-clamp-1">
+                      {content?.chapters[0]?.title}
+                    </p>
                   </a>
-                ))} */}
+                  {/* ))} */}
+                  <DocViewer
+                    documents={docs}
+                    pluginRenderers={DocViewerRenderers}
+                  />
                 </div>
               </>
             )}
