@@ -14,8 +14,8 @@ const Monitor = () => {
           Lessons Completed
         </span>
       </div>
-      <h2>Your Personal Progress</h2>
-      <h3>
+      <h2 className="text-3xl font-bold my-6">Your Personal Progress</h2>
+      <h3 className="text-base">
         One day or day one? You decide. Remember that the best way to get
         something done... is to begin.
       </h3>
