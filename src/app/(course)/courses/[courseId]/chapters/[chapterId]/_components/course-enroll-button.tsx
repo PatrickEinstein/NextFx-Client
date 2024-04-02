@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 type Props = {
-  price: number;
+  price?: number;
   courseId: string;
 };
 

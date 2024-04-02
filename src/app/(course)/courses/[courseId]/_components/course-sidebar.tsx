@@ -15,22 +15,6 @@ export const CourseSidebar = ({
   course,
   progressCount,
 }: CourseSidebarProps) => {
-  // const { userId } = auth();
-
-  // if (!userId) {
-  //   return redirect("/");
-  // }
-
-  // const purchase = await db.purchase.findUnique({
-  //   where: {
-  //     userId_courseId: {
-  //       userId,
-  //       courseId: course.id,
-  //     },
-  //   },
-  // });
-
-  // console.log(`Course-in-sidebar---->`,course)
 
   return (
     <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm">
