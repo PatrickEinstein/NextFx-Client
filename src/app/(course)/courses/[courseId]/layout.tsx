@@ -8,6 +8,7 @@ import { CourseSidebar } from "./_components/course-sidebar";
 import CourseNavbar from "./_components/course-navbar";
 import { useCallback, useEffect, useState } from "react";
 import { GetCourseAndChapters } from "../../../../../utils/fetches/api.fetch";
+import { Navbar } from "@/components";
 
 const CourseLayout = ({
   children,
@@ -18,6 +19,7 @@ const CourseLayout = ({
 }) => {
   const { courseId } = params;
 
+
   const load = {
     courseId: courseId,
   };
@@ -25,10 +27,8 @@ const CourseLayout = ({
   const newsGot = useCallback(async () => {
     try {
       const newNews = await GetCourseAndChapters(load);
-      // console.log(`courseContentInSideBAr==>`, newNews.message);
       SetCourse(newNews?.message);
     } catch (error: any) {
-      // console.error("Error fetching course data:", error.message);
     }
   }, []);
   useEffect(() => {

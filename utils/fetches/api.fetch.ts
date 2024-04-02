@@ -81,6 +81,17 @@ export const GetCourseAndChapters = async ({
   return res;
 };
 
+
+export const GetChapter = async ({
+  courseId,
+}: ThisCourseAndChapter) => {
+  console.log(`cchapotrid::`,courseId)
+  const res = await HttpGetCallerWhole(`${baseUrl}/get/Video/${courseId}`, {
+    "Content-Type": "application/json",
+  });
+  return res;
+};
+
 export const GetSomeCHapters = async ({ page, pageSize }: Props) => {
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
