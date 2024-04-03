@@ -12,7 +12,7 @@ const navigation = {
     { name: "Insights", href: "#" },
   ],
   support: [
-    { name: "Pricing", href: "#" },
+    { name: "Pricing", href: "/pay" },
     { name: "Documentation", href: "#" },
     { name: "Guides", href: "#" },
     { name: "API Status", href: "#" },
