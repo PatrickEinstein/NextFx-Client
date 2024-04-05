@@ -1,9 +1,14 @@
+"use client";
+
 import Banner from "@/components/banner";
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const TestPage = () => {
   // should be obtained from an API
+
+  const router = useRouter();
 
   const categories = [
     {
@@ -269,9 +274,22 @@ const TestPage = () => {
 
   return (
     <div className="px-5 w-full pb-9">
-      <Banner variant="success" label="See updated topics" />
+      {/* <Banner variant="success" label="See updated topics" /> */}
       <div className="w-full flex flex-col md:flex-row gap-5">
         <div className="w-full flex flex-col gap-3">
+          {/*Header*/}
+          <div className="w-full flex flex-col">
+            <div className="w-full flex flex-row items-center justify-between py-2">
+              <h4 className="text-base font-bold text-gray-500">Category</h4>
+              <span className="text-base font-bold text-gray-500">Topics</span>
+            </div>
+            <Separator
+              orientation="horizontal"
+              className="w-full h-1 bg-gray-300"
+            />
+          </div>
+
+          {/*Categories*/}
           {categories.map((category, index) => (
             <div
               className="w-full flex flex-row items-center gap-3"
@@ -287,7 +305,17 @@ const TestPage = () => {
                 className="w-full flex flex-row items-start justify-between gap-3 p-4 border border-gray-200 rounded-md"
               >
                 <div className="flex flex-col gap-3">
-                  <h3 className="text-xl font-semibold text-primary">
+                  <h3
+                    className="text-xl font-semibold text-primary cursor-pointer"
+                    onClick={() => {
+                      router.push(
+                        `/forums/c/${category.title
+                          .toLowerCase()
+                          .split(" ")
+                          .join("-")}`
+                      );
+                    }}
+                  >
                     {category.title}
                   </h3>
                   <p className="text-gray-600">{category.description}</p>
@@ -318,6 +346,18 @@ const TestPage = () => {
         </div>
 
         <div className="w-full flex flex-col gap-3">
+          {/*Header*/}
+          <div className="w-full flex flex-col">
+            <div className="w-full flex flex-row items-center justify-between py-2">
+              <h4 className="text-base font-bold text-gray-500">Latest</h4>
+            </div>
+            <Separator
+              orientation="horizontal"
+              className="w-full h-1 bg-gray-300"
+            />
+          </div>
+
+          {/*News*/}
           {news.map((news_list, index) => (
             <div
               className="w-full flex flex-row items-center gap-3"
@@ -337,7 +377,7 @@ const TestPage = () => {
                     {news_list?.title}
                   </h3>
                   <p className="text-gray-600">
-                    Announcement category: {news_list?.announcement_category}
+                    category: {news_list?.announcement_category}
                   </p>
                 </div>
 

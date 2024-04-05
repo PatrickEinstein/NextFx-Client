@@ -153,7 +153,7 @@ const ForumPagesLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="h-full">
-      <div className="fixed inset-y-0 w-full z-50">
+      <div className="fixed inset-auto-0 w-full z-50">
         <Navbar />
       </div>
       <div className="h-[80px] md:pl-80 fixed inset-y-20 w-full z-50">
