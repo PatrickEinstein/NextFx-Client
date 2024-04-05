@@ -17,12 +17,12 @@ const CoursesListOverview = () => {
   const [fullCourse, setFullCourse] = useState([
     {
       title: "test",
-      description:"test",
+      description: "test",
       id: "",
       chapters: [],
     },
   ]);
-  const total = fullCourse.length
+  const total = fullCourse.length;
 
   const FindAvailableCourses = useCallback(async () => {
     try {

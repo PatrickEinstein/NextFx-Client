@@ -15,25 +15,33 @@ type props = {
   course: Array<course>;
   level: string;
   indexNum?: number;
-  description:string;
-  total:Number;
+  description: string;
+  total: Number;
 };
 
-const CourseSchemeBox = ({ course, level,description, indexNum,total }: props) => {
+const CourseSchemeBox = ({
+  course,
+  level,
+  description,
+  indexNum,
+  total,
+}: props) => {
   return (
     <div className="max-w-3xl mx-auto py-8 shadow-sm">
       <div className="flex flex-col md:flex-row items-center">
         <Image src={school_badge} alt="school badge" className="h-[400px]" />
         <div className="flex flex-col gap-3 items-start">
           <p className="text-sm font-normal">
-            Course {Number(indexNum) + Number(0)} of {total}
+            {`Course ${Number(indexNum) + Number(0)} of ${total}`}
           </p>
           <h2 className="text-2xl font-bold">{level}</h2>
-          <span className="text-base">
-            {description}
-          </span>
+          <span className="text-base">{description}</span>
           <button className="py-2 px-4 bg-secondary text-primary font-semibold rounded-[40px]">
-            <Link href={`/courses/${course[Number(indexNum)]?.courseId}/chapters/${course[Number(indexNum)]?._id}`}>
+            <Link
+              href={`/courses/${course[Number(indexNum)]?.courseId}/chapters/${
+                course[Number(indexNum)]?._id
+              }`}
+            >
               Start Course
             </Link>
           </button>
