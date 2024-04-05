@@ -3,33 +3,39 @@ import React, { useState } from "react";
 import school_badge from "../../public/badge2.png";
 import play from "../../public/play.svg";
 import { Separator } from "./ui/separator";
+import Link from "next/link";
 
 type course = {
   title: string;
+  courseId: string;
+  _id: string;
 };
 
 type props = {
   course: Array<course>;
   level: string;
   indexNum?: number;
+  description:string;
+  total:Number;
 };
 
-const CourseSchemeBox = ({ course, level, indexNum }: props) => {
+const CourseSchemeBox = ({ course, level,description, indexNum,total }: props) => {
   return (
     <div className="max-w-3xl mx-auto py-8 shadow-sm">
       <div className="flex flex-col md:flex-row items-center">
-        <Image src={school_badge} alt="school badge" className="h-[300px]" />
+        <Image src={school_badge} alt="school badge" className="h-[400px]" />
         <div className="flex flex-col gap-3 items-start">
           <p className="text-sm font-normal">
-            Course {Number(indexNum) + Number(1)} of 11
+            Course {Number(indexNum) + Number(0)} of {total}
           </p>
           <h2 className="text-2xl font-bold">{level}</h2>
           <span className="text-base">
-            Currency trading? Forex trading? FX trading? Totally clueless about
-            forex? Here is an introduction to the foreign exchange market.
+            {description}
           </span>
           <button className="py-2 px-4 bg-secondary text-primary font-semibold rounded-[40px]">
-            Start Course
+            <Link href={`/courses/${course[Number(indexNum)]?.courseId}/chapters/${course[Number(indexNum)]?._id}`}>
+              Start Course
+            </Link>
           </button>
         </div>
       </div>
@@ -42,10 +48,16 @@ const CourseSchemeBox = ({ course, level, indexNum }: props) => {
         </div>
         <div className="w-full">
           <h2 className="text-xl font-bold mb-4">Course Outline</h2>
-          {course.map(({ title }, index) => (
+          {course.map(({ title, courseId, _id }, index) => (
             <div key={index} className="flex flex-row gap-4">
               <div className="flex items-center justify-center flex-col">
-                <Image src={play} alt="play" className="h-[30px] w-[30px]" />
+                <Link href={`/courses/${courseId}/chapters/${_id}`}>
+                  <Image
+                    src={play}
+                    alt="play"
+                    className="h-[30px] w-[30px] cursor-pointer"
+                  />
+                </Link>
                 {course.length - 1 !== index && (
                   <Separator
                     orientation="vertical"
