@@ -1,7 +1,11 @@
 "use client";
 import Head from "next/head";
 import Link from "next/link";
-import { PayWithPayPal, PayWithStripe } from "../../../utils/fetches/api.fetch";
+import {
+  PayWithPayPal,
+  PayWithPelPay,
+  PayWithStripe,
+} from "../../../utils/fetches/api.fetch";
 
 const PaymentOptionsPage = () => {
   const PayPal = async () => {
@@ -14,7 +18,14 @@ const PaymentOptionsPage = () => {
 
   const PayStripe = async () => {
     const pay = await PayWithStripe();
-    console.log(`paypal`, pay);
+    console.log(`paystripe`, pay);
+    if (pay.status === true) {
+      window.location.href = pay.message;
+    }
+  };
+  const PelPay = async () => {
+    const pay = await PayWithPelPay();
+    console.log(`pelpay`, pay);
     if (pay.status === true) {
       window.location.href = pay.message;
     }
@@ -44,11 +55,12 @@ const PaymentOptionsPage = () => {
             Pay with PayPal
           </h3>
 
-          <Link href="/paypal-payment">
-            <h3 className="bg-green-500 hover:bg-red-600 text-white py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out text-center">
-              Pay with PelPay
-            </h3>
-          </Link>
+          <h3
+            onClick={PelPay}
+            className="bg-green-500 hover:bg-red-600 text-white py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out text-center"
+          >
+            Pay with PelPay
+          </h3>
         </div>
       </main>
 

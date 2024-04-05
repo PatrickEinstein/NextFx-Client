@@ -1,9 +1,36 @@
+"use client";
 import Banner from "@/components/banner";
 import { Separator } from "@/components/ui/separator";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { Threads } from "../../../utils/fetches/api.fetch";
 
 const TestPage = () => {
-  // should be obtained from an API
+  const [forum, SetForum] = useState([
+    {
+      forum: {
+        _id: "",
+        title: "",
+        description: "",
+      },
+      repliesNumber:""
+    },
+  ]);
+  let load = {
+    page: 1,
+    pageSize: 10,
+  };
+  const ForumGot = useCallback(async () => {
+    const newForum = await Threads(load);
+    // console.log(`ForunForums==>`, newForum.message);
+    if (newForum.message === "Failed to fetch") {
+      return;
+    }
+    SetForum(newForum.message);
+  }, []);
+
+  useEffect(() => {
+    ForumGot();
+  }, []);
 
   const categories = [
     {
@@ -272,7 +299,7 @@ const TestPage = () => {
       <Banner variant="success" label="See updated topics" />
       <div className="w-full flex flex-col md:flex-row gap-5">
         <div className="w-full flex flex-col gap-3">
-          {categories.map((category, index) => (
+          {forum.map((category, index) => (
             <div
               className="w-full flex flex-row items-center gap-3"
               key={index}
@@ -288,28 +315,28 @@ const TestPage = () => {
               >
                 <div className="flex flex-col gap-3">
                   <h3 className="text-xl font-semibold text-primary">
-                    {category.title}
+                    {category.forum.title}
                   </h3>
-                  <p className="text-gray-600">{category.description}</p>
+                  <p className="text-gray-600">{category.forum.description}</p>
                   <ul className="list-disc pl-5">
-                    {category.bullet_points.map((point, index) => (
+                    {/* {category.bullet_points.map((point, index) => (
                       <li key={index} className="text-gray-600">
                         {point}
                       </li>
-                    ))}
+                    ))} */}
                   </ul>
                 </div>
 
                 <div className="flex items-end flex-col gap-2">
                   <p className="text-sm text-gray-400">
                     <span className="text-base font-bold font-monoSans text-primary">
-                      {category?.per_week}
+                      {category?.repliesNumber}
                     </span>{" "}
                     / week
                   </p>
 
                   <span className="text-[12px] text-gray-400">
-                    {category?.new} new
+                    {/* {category?.new} new */}
                   </span>
                 </div>
               </div>

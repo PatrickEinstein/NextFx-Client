@@ -18,7 +18,7 @@ export const Hero = () => {
               complete beginner&apos;s guide to forex trading.
             </h3>
             <button className="h-12 w-40 rounded-3xl bg-primary font-bold text-white">
-              Get Started
+              <a href="/overview">Get Started</a>
             </button>
           </div>
           <div className="w-1/2">
