@@ -1,52 +1,99 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
+
 const LoginPage = () => {
+  const router = useRouter();
   return (
-    <div className="h-full w-full flex items-center justify-center">
-      <div className="flex items-start flex-col">
+    <div className="h-full w-full flex items-center justify-center ">
+      <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
         <div className="flex items-start flex-col gap-6">
           <h2 className="text-[36px] font-medium tracking-[1.44px]">
             Login in to Web Pips
           </h2>
-          <p className="text-[16px] leading-[24px] font-normal">
-            Enter your details below
-          </p>
         </div>
 
         {/*Form*/}
-        <div className="flex items-start flex-col gap-[40px] pt-[48px] w-full">
-          <input
-            type="text"
-            className="pb-2 outline-none border-b border-b-[#000]/50 text-[16px] leading-[24px] w-full"
-            placeholder="Email and Phone Number"
-          />
+        <div className="flex items-start flex-col gap-[20px] pt-[28px] w-full">
+          <div className="flex flex-col items-start gap-2 w-full">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              placeholder="Enter Email here"
+              className="w-full"
+              name="email"
+            />
+          </div>
 
-          <input
-            type="text"
-            className="pb-2 outline-none border-b border-b-[#000]/50 text-[16px] leading-[24px] w-full"
-            placeholder="Password"
-          />
+          <div className="flex flex-col items-start gap-2 w-full">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              placeholder="Enter Password here"
+              type="password"
+              className="w-full"
+              name="email"
+            />
+          </div>
 
           <div className="flex w-full items-center justify-between gap-4">
-            <div className="flex items-center justify-center px-[30px] bg-buttonColor">
-              <button onClick={() => {}} type="button">
-                Login
-              </button>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="remember"
+                name="remember"
+                className="rounded-[4px]"
+              />
+              <Label htmlFor="remember" className="text-[14px]">
+                Remember me
+              </Label>
             </div>
 
-            <span className="text-buttonColor text-[16px] font-medium">
+            <span className="text-buttonColor text-[14px] font-medium">
               Forget Password?
             </span>
           </div>
 
+          {/*Button section*/}
+          <div className="w-full flex flex-col gap-2">
+            <button
+              className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
+              onClick={() => {}}
+              type="button"
+            >
+              <span>Login</span>
+            </button>
+
+            <div className="flex w-full items-center justify-center">
+              <span className="text-base font-semibold">Or</span>
+            </div>
+
+            <button
+              className="w-full flex items-center justify-center px-[30px] bg-white text-primary border border-primary py-3 rounded-lg gap-3"
+              onClick={() => {}}
+              type="button"
+            >
+              <Image
+                src={"/google.svg"}
+                alt="google-icon"
+                width={20}
+                height={20}
+              />
+              <span>Login with Google</span>
+            </button>
+          </div>
+
           <div className="flex w-full items-center justify-center gap-4">
             <span className="text-[16px] text-black/70 font-normal leading-[24px]">
-              Don#t have an account?
+              Don&apos;t have an account?
             </span>
             <span
               className="text-[16px] text-buttonColor font-medium leading-[24px] underline cursor-pointer"
               onClick={() => {
-                // navigate("/register");
+                router.push("/register");
               }}
             >
               Sign up
