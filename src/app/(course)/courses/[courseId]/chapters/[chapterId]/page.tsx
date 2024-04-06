@@ -98,7 +98,7 @@ const ChapterIdPage = ({
               />
             )}
           </div>
-          
+
           <Separator />
           <div>
             <Preview value={chapter?.description} />

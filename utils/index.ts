@@ -18,12 +18,17 @@ export const HttpGetCallerWhole = async (endpoint: any, headers: any) => {
   }
 };
 
-export const HttpOTHERcaller = async (endpoint: any, headers: any,method :string,body:Object) => {
+export const HttpOTHERcaller = async (
+  endpoint: any,
+  headers: any,
+  method: string,
+  body: Object
+) => {
   try {
     const savedUserResponse = await fetch(`${endpoint}`, {
       method: method,
       headers: headers,
-      body:JSON.stringify(body)
+      body: JSON.stringify(body),
     });
 
     if (!savedUserResponse.ok) {
