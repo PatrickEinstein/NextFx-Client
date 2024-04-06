@@ -5,8 +5,38 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
+import { ChangeEvent, useCallback, useState } from "react";
+import { Login } from "../../../../utils/fetches/api.fetch";
 
+interface UserInfo {
+  email: string;
+  password: string;
+}
 const LoginPage = () => {
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    email: "",
+    password: "",
+  });
+  const onSetUserInfo = (
+    e: ChangeEvent<HTMLInputElement>,
+    fieldName: keyof UserInfo
+  ) => {
+    const value = e.target.value;
+    setUserInfo((prev) => ({
+      ...prev,
+      [fieldName]: value,
+    }));
+  };
+  const onLogin = useCallback(async () => {
+    const login = await Login(userInfo);
+    if (login.status === true) {
+      sessionStorage.setItem("token", login.response);
+      sessionStorage.setItem("user", login.user);
+      // router.push("/dashboard");
+    } else {
+      alert(login.response);
+    }
+  }, [userInfo]);
   const router = useRouter();
   return (
     <div className="h-full w-full flex items-center justify-center ">
@@ -26,6 +56,7 @@ const LoginPage = () => {
               placeholder="Enter Email here"
               className="w-full"
               name="email"
+              onChange={(e) => onSetUserInfo(e, "email")}
             />
           </div>
 
@@ -37,6 +68,7 @@ const LoginPage = () => {
               type="password"
               className="w-full"
               name="email"
+              onChange={(e) => onSetUserInfo(e, "password")}
             />
           </div>
 
@@ -61,7 +93,7 @@ const LoginPage = () => {
           <div className="w-full flex flex-col gap-2">
             <button
               className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
-              onClick={() => {}}
+              onClick={onLogin}
               type="button"
             >
               <span>Login</span>
@@ -73,7 +105,9 @@ const LoginPage = () => {
 
             <button
               className="w-full flex items-center justify-center px-[30px] bg-white text-primary border border-primary py-3 rounded-lg gap-3"
-              onClick={() => {}}
+              onClick={() => {
+                router.push("http://localhost:5000/auth/login/google");
+              }}
               type="button"
             >
               <Image
