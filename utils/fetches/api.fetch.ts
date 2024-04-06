@@ -2,6 +2,8 @@
 
 import { HttpGetCallerWhole, HttpOTHERcaller } from "../index";
 
+const token = sessionStorage.getItem("token");
+const user = sessionStorage.getItem("user");
 const baseUrl = "http://localhost:5000";
 //  const baseUrl = "https://fxserver-1.onrender.com";
 
@@ -77,14 +79,15 @@ export const GetCourseAndChapters = async ({
 }: ThisCourseAndChapter) => {
   const res = await HttpGetCallerWhole(`${baseUrl}/api/course/${courseId}`, {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
   });
   return res;
 };
 
 export const GetChapter = async ({ courseId }: ThisCourseAndChapter) => {
-  console.log(`cchapotrid::`, courseId);
   const res = await HttpGetCallerWhole(`${baseUrl}/get/Video/${courseId}`, {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
   });
   return res;
 };
@@ -94,6 +97,7 @@ export const GetSomeCHapters = async ({ page, pageSize }: Props) => {
     `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
     {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     }
   );
   return res;
@@ -104,6 +108,7 @@ export const GetCourses = async ({ page, pageSize }: Props) => {
     `${baseUrl}/api/resources/getAllCourses/${page}/${pageSize}`,
     {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     }
   );
   return res;
@@ -114,6 +119,7 @@ export const GetChaptersByCourseID = async ({
 }: ThisCourseAndChapter) => {
   const res = await HttpGetCallerWhole(`${baseUrl}/api/course/${courseId}`, {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
   });
   return res;
 };
@@ -126,21 +132,60 @@ type Article = {
 export const getAnArticle = async ({ article, id }: Article) => {
   const res = await HttpGetCallerWhole(`${baseUrl}/get/${article}/${id}`, {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
   });
   return res;
 };
 
-export const PayWithPayPal = async () => {
+type AuthProps = {
+  firstname?: string;
+  lastname?: string;
+  dateOfBirth?: string;
+  email: string;
+  password: string;
+  experience?: string;
+};
+export const Register = async (payload: AuthProps) => {
+  const res = await HttpOTHERcaller(
+    `${baseUrl}/api/registerUser`,
+    {
+      "Content-Type": "application/json",
+    },
+    "POST",
+    payload
+  );
+  return res;
+};
+
+export const Login = async (payload: AuthProps) => {
+  const res = await HttpOTHERcaller(
+    `${baseUrl}/api/login`,
+    {
+      "Content-Type": "application/json",
+    },
+    "POST",
+    payload
+  );
+  return res;
+};
+
+export const PayWithPayPal = async ({
+  descriptions,
+}: {
+  descriptions: string;
+}) => {
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/paypal/create`,
     {
       "Content-Type": "application/json",
+      // "Authorization": `Bearer ${token}`
     },
     "POST",
     {
       amount: 100,
       currency: "USD",
-      descriptions: "Subsricption",
+      description: descriptions,
+      userId: user,
     }
   );
   return res;
@@ -151,6 +196,7 @@ export const PayWithStripe = async () => {
     `${baseUrl}/api/stripe/create`,
     {
       "Content-Type": "application/json",
+      // "Authorization": `Bearer ${token}`
     },
     "POST",
     {
@@ -164,18 +210,24 @@ export const PayWithStripe = async () => {
   return res;
 };
 
-export const PayWithPelPay = async () => {
+export const PayWithPelPay = async ({
+  descriptions,
+}: {
+  descriptions: string;
+}) => {
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/PelPay`,
     {
       "Content-Type": "application/json",
+      // "Authorization": `Bearer ${token}`
     },
     "POST",
     {
       amount: 100,
+      userId: user,
       currency: "USD",
       merchantRef: "13277654324537993",
-      narration: "test",
+      narration: descriptions,
       callBackUrl: "http://localhost:5000/api/pelpaycallback",
       splitCode: "",
       houldTokenizeCard: false,
@@ -196,5 +248,21 @@ export const PayWithPelPay = async () => {
       merchantDescription: "string",
     }
   );
+  return res;
+};
+
+export const fetchUserRegisteredCourses = async () => {
+  const res = await HttpGetCallerWhole(`${baseUrl}/get/userCourses/${user}`, {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  });
+  return res;
+};
+
+export const FetchTransactionStatus = async (transactionId: string ) => {
+  const res = await HttpGetCallerWhole(`${baseUrl}/get/transaction/${transactionId}`, {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  });
   return res;
 };

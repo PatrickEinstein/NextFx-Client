@@ -1,15 +1,16 @@
 "use client";
 import Head from "next/head";
-import Link from "next/link";
 import {
   PayWithPayPal,
   PayWithPelPay,
   PayWithStripe,
-} from "../../../utils/fetches/api.fetch";
+} from "../../../../utils/fetches/api.fetch";
 
-const PaymentOptionsPage = () => {
+const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
+  const { courseId } = params;
+
   const PayPal = async () => {
-    const pay = await PayWithPayPal();
+    const pay = await PayWithPayPal({ descriptions: courseId });
     console.log(`paypal`, pay);
     if (pay.status === true) {
       window.location.href = pay.message;
@@ -24,7 +25,7 @@ const PaymentOptionsPage = () => {
     }
   };
   const PelPay = async () => {
-    const pay = await PayWithPelPay();
+    const pay = await PayWithPelPay({ descriptions: courseId });
     console.log(`pelpay`, pay);
     if (pay.status === true) {
       window.location.href = pay.message;
