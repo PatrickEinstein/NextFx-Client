@@ -7,6 +7,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { Register } from "../../../../utils/fetches/api.fetch";
+import { Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const RegisterPage = () => {
   interface UserInfo {
@@ -28,6 +30,8 @@ const RegisterPage = () => {
     experience: userExperience,
     age: 0,
   });
+  const [loading, setLoading] = useState<boolean>(false);
+  const { toast } = useToast();
   // console.log(userInfo);
   useEffect(() => {
     const dob = new Date(userInfo.DateOfBirth);
@@ -59,15 +63,23 @@ const RegisterPage = () => {
     }));
   };
 
-
   const onRegister = useCallback(async () => {
+    setLoading(true);
     const reg = await Register(userInfo);
-    console.log(`regg::`, reg);
     if (reg.status === true) {
-      alert(reg.response.split(",")[0]);
+      setLoading(false);
+      toast({
+        description: reg.response.split(",")[0],
+      });
       router.push("/login");
     } else {
-      alert(reg.message);
+      setLoading(false);
+      const response = JSON.parse(reg.message);
+      toast({
+        variant: "destructive",
+        description: response.message,
+      });
+      // alert(reg.message);
     }
   }, [userInfo]);
   const router = useRouter();
@@ -82,7 +94,7 @@ const RegisterPage = () => {
 
         {/*Form*/}
         <div className="flex items-start flex-col gap-5 pt-[28px] w-full">
-          <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex flex-col md:flex-row gap-3 w-full">
             <div className="flex flex-col items-start gap-2 w-full">
               <Label htmlFor="firstname">Firstname</Label>
               <Input
@@ -104,7 +116,7 @@ const RegisterPage = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex flex-col md:flex-row gap-3 w-full">
             <div className="flex flex-col items-start gap-2 w-full">
               <Label htmlFor="date">Date of Birth</Label>
               <Input
@@ -119,7 +131,7 @@ const RegisterPage = () => {
             <div className="flex flex-col items-start gap-2 w-full">
               <Label htmlFor="experience">Years of Experience</Label>
               <select
-                className="w-full"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                 value={userExperience}
                 onChange={handleUserExperienceChange}
               >
@@ -161,7 +173,11 @@ const RegisterPage = () => {
               className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
               onClick={onRegister}
               type="button"
+              disabled={loading}
             >
+              {loading && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin text-white" />
+              )}
               <span>Register</span>
             </button>
 
