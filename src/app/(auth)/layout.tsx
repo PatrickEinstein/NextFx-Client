@@ -19,7 +19,7 @@ const AuthPages = ({ children }: AuthPagesProps) => {
 
       <main className="w-full h-full bg-white">
         <div className="w-full h-full flex items-center">
-          <div className="w-[60%] h-full py-8 bg-tertiary">
+          <div className="w-[60%] h-full py-8 bg-tertiary hidden lg:block">
             <div className="w-full h-full py-8 flex items-center justify-center">
               <Image src={Logo} alt="Logo" className="h-[calc(100vh-200px)]" />
             </div>
