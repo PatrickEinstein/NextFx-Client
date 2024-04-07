@@ -36,9 +36,9 @@ const CoursesListOverview = () => {
         };
         const chapters = await GetChaptersByCourseID(chapterLoad);
 
-        const jsonMessage = await JSON.parse(chapters.message);
+        // const jsonMessage = await JSON.parse(chapters.message);
 
-        if (jsonMessage?.message === "Unauthorized") {
+        if (chapters?.message === "Unauthorized") {
           // alert("Unauthorized");
           router.push("/login");
           return;

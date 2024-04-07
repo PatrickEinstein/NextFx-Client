@@ -268,6 +268,15 @@ export const PayWithPelPay = async ({
   return res;
 };
 
+export const GetUserById = async () => {
+  const token = sessionStorage.getItem("token");
+  const user = sessionStorage.getItem("user");
+  const res = await HttpGetCallerWhole(`${baseUrl}/get/user/${user}`, {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  });
+  return res;
+};
 export const fetchUserRegisteredCourses = async () => {
   const token = sessionStorage.getItem("token");
   const user = sessionStorage.getItem("user");

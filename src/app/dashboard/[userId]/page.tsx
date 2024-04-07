@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
   GetChaptersByCourseID,
+  GetUserById,
   fetchUserRegisteredCourses,
 } from "../../../../utils/fetches/api.fetch";
 
@@ -20,9 +21,17 @@ const DashboardPage = () => {
       _id: "",
     },
   ]);
+  const [currentUser, setCurrentUser] = useState({
+    firstName:"",
+    lastName:"",
+    DateOfBirth:"",
+    email: "",
+  });
 
   const Courses = useCallback(async () => {
     const regs = await fetchUserRegisteredCourses();
+    const currentUser = await GetUserById();
+    setCurrentUser(currentUser.message);
     setRegisteredCourses(regs.courses);
   }, []);
 
@@ -66,7 +75,7 @@ const DashboardPage = () => {
                 <Label htmlFor="firstname">Firstname</Label>
                 <Input
                   id="firstname"
-                  value={"Patrick"}
+                  value={currentUser.firstName}
                   className="w-full"
                   name="firstname"
                   disabled={true}
@@ -77,7 +86,7 @@ const DashboardPage = () => {
               <Label htmlFor="lastname">Lastname</Label>
               <Input
                 id="lastname"
-                value={"Doe"}
+                value={currentUser.lastName}
                 className="w-full"
                 name="lastname"
                 disabled={true}
@@ -88,7 +97,7 @@ const DashboardPage = () => {
                 <Label htmlFor="date">Date of Birth</Label>
                 <Input
                   id="dateOfBirth"
-                  value={"1990-01-01"}
+                  value={currentUser.DateOfBirth}
                   className="w-full"
                   name="dateOfBirth"
                   type="date"
@@ -100,7 +109,7 @@ const DashboardPage = () => {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                value={"patrickeistein@gmail.com"}
+                value={currentUser.email}
                 className="w-full"
                 name="email"
                 disabled={true}

@@ -22,7 +22,6 @@ export const Navbar = () => {
   const [user, setUser] = useState<string | null>(null);
   const isLoggedInuser = sessionStorage.getItem("user");
 
-  console.log(`isLoggedIn`, isLoggedInuser);
 
   useEffect(() => {
     const user = sessionStorage.getItem("user");

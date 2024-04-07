@@ -48,15 +48,16 @@ export const UserDropDownMenuContent = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const user = sessionStorage.getItem("user");
 
   return (
     <DropdownMenuContent className="w-56" align={alignValue}>
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={()=>router.push(`/dashboard/${user}`)}>
           <LayoutDashboard className="mr-2 h-4 w-4" />
-          <span>Dashboard</span>
+          <span >Dashboard</span>
         </DropdownMenuItem>
         {/* <DropdownMenuItem className="cursor-pointer">
           <User className="mr-2 h-4 w-4" />
