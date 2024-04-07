@@ -8,10 +8,10 @@ const Intro = () => {
       <Image src={school_badge} alt="school badge" className="lg:h-[500px]" />
       <h2 className="text-3xl font-bold mb-4">School of WebPips</h2>
       <span className="w-full text-base lg:max-w-3xl text-center">
-        Welcome! Are you new to trading forex? The School of WebPips is our
-        free online course that helps beginners learn how to trade forex. If you
-        have always wanted to learn to trade but have no idea where to begin,
-        then this course is for you.
+        Welcome! Are you new to trading forex? The School of WebPips is our free
+        online course that helps beginners learn how to trade forex. If you have
+        always wanted to learn to trade but have no idea where to begin, then
+        this course is for you.
       </span>
     </div>
   );

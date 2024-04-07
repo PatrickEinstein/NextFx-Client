@@ -49,12 +49,14 @@ const CourseSchemeBox = ({
       router.push(`/enroll/${course[Number(indexNum)]?.courseId}`);
     }
   };
+
   return (
     <div className="max-w-3xl mx-auto py-8 shadow-sm">
       <div className="flex flex-col md:flex-row items-center">
         <Image src={school_badge} alt="school badge" className="h-[400px]" />
         <div className="flex flex-col gap-3 items-start">
           <p className="text-sm font-normal">
+
             Course {Number(indexNum) + Number(0)} of {Number(total)}
           </p>
           <h2 className="text-2xl font-bold">{level}</h2>
@@ -66,6 +68,7 @@ const CourseSchemeBox = ({
             {/* <Link href={`/courses/${course[Number(indexNum)]?.courseId}/chapters/${course[Number(indexNum)]?._id}`}> */}
             Start Course
             {/* </Link> */}
+
           </button>
         </div>
       </div>
