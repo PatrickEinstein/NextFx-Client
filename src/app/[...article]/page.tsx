@@ -11,7 +11,7 @@ import Footer from "@/components/NewFooter";
 // };
 type ViewArticleProps = {
   children?: React.ReactNode;
-  params: { article: string[] };
+  params: { article: ["",""] };
 };
 const ViewArticlePage = ({ params }: ViewArticleProps) => {
   const News = params.article[0];
