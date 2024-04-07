@@ -28,6 +28,7 @@ export const Navbar = () => {
 
     if (user !== null && (path === "/login" || path === "/register")) {
       // window.location.href = "/";
+      // route
     }
   }, []);
 

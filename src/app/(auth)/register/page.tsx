@@ -66,7 +66,6 @@ const RegisterPage = () => {
   const onRegister = useCallback(async () => {
     setLoading(true);
     const reg = await Register(userInfo);
-    console.log(`regg::`, reg);
     if (reg.status === true) {
       setLoading(false);
       toast({
