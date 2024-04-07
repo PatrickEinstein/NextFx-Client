@@ -3,6 +3,7 @@
 import React from "react";
 import Logo from "../../public/HeroPic.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Hero = () => {
   return (
@@ -18,7 +19,7 @@ export const Hero = () => {
               complete beginner&apos;s guide to forex trading.
             </h3>
             <button className="h-12 w-40 rounded-3xl bg-primary font-bold text-white">
-              <a href="/overview">Get Started</a>
+              <Link href="/overview">Get Started</Link>
             </button>
           </div>
           <div className="w-1/2">

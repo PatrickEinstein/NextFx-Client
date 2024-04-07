@@ -2,8 +2,6 @@
 
 import { HttpGetCallerWhole, HttpOTHERcaller } from "../index";
 
-const token = sessionStorage.getItem("token");
-const user = sessionStorage.getItem("user");
 const baseUrl = "http://localhost:5000";
 //  const baseUrl = "https://fxserver-1.onrender.com";
 
@@ -77,6 +75,7 @@ type ThisCourseAndChapter = {
 export const GetCourseAndChapters = async ({
   courseId,
 }: ThisCourseAndChapter) => {
+  const token = sessionStorage.getItem("token");
   const res = await HttpGetCallerWhole(`${baseUrl}/api/course/${courseId}`, {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -85,6 +84,7 @@ export const GetCourseAndChapters = async ({
 };
 
 export const GetChapter = async ({ courseId }: ThisCourseAndChapter) => {
+  const token = sessionStorage.getItem("token");
   const res = await HttpGetCallerWhole(`${baseUrl}/get/Video/${courseId}`, {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -93,6 +93,7 @@ export const GetChapter = async ({ courseId }: ThisCourseAndChapter) => {
 };
 
 export const GetSomeCHapters = async ({ page, pageSize }: Props) => {
+  const token = sessionStorage.getItem("token");
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllVideos/${page}/${pageSize}`,
     {
@@ -104,6 +105,7 @@ export const GetSomeCHapters = async ({ page, pageSize }: Props) => {
 };
 
 export const GetCourses = async ({ page, pageSize }: Props) => {
+  const token = sessionStorage.getItem("token");
   const res = await HttpGetCallerWhole(
     `${baseUrl}/api/resources/getAllCourses/${page}/${pageSize}`,
     {
@@ -117,6 +119,7 @@ export const GetCourses = async ({ page, pageSize }: Props) => {
 export const GetChaptersByCourseID = async ({
   courseId,
 }: ThisCourseAndChapter) => {
+  const token = sessionStorage.getItem("token");
   const res = await HttpGetCallerWhole(`${baseUrl}/api/course/${courseId}`, {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -130,6 +133,7 @@ type Article = {
 };
 
 export const getAnArticle = async ({ article, id }: Article) => {
+  const token = sessionStorage.getItem("token");
   const res = await HttpGetCallerWhole(`${baseUrl}/get/${article}/${id}`, {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -174,6 +178,7 @@ export const PayWithPayPal = async ({
 }: {
   descriptions: string;
 }) => {
+  const user = sessionStorage.getItem("user");
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/paypal/create`,
     {
@@ -215,6 +220,7 @@ export const PayWithPelPay = async ({
 }: {
   descriptions: string;
 }) => {
+  const user = sessionStorage.getItem("user");
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/PelPay`,
     {
@@ -252,6 +258,8 @@ export const PayWithPelPay = async ({
 };
 
 export const fetchUserRegisteredCourses = async () => {
+  const token = sessionStorage.getItem("token");
+  const user = sessionStorage.getItem("user");
   const res = await HttpGetCallerWhole(`${baseUrl}/get/userCourses/${user}`, {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -259,10 +267,14 @@ export const fetchUserRegisteredCourses = async () => {
   return res;
 };
 
-export const FetchTransactionStatus = async (transactionId: string ) => {
-  const res = await HttpGetCallerWhole(`${baseUrl}/get/transaction/${transactionId}`, {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
-  });
+export const FetchTransactionStatus = async (transactionId: string) => {
+  const token = sessionStorage.getItem("token");
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/get/transaction/${transactionId}`,
+    {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  );
   return res;
 };
