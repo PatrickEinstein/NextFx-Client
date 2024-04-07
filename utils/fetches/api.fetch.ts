@@ -178,7 +178,7 @@ export const PayWithPayPal = async ({
     `${baseUrl}/api/paypal/create`,
     {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
     "POST",
     {
@@ -200,7 +200,7 @@ export const PayWithStripe = async ({
     `${baseUrl}/api/stripe/create`,
     {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
     "POST",
     {
@@ -224,7 +224,7 @@ export const PayWithPelPay = async ({
     `${baseUrl}/api/PelPay`,
     {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
     "POST",
     {

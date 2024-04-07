@@ -43,16 +43,13 @@ const CoursesListOverview = () => {
     FindAvailableCourses();
   }, []);
 
-
   return (
     <div className="w-full max-w-7xl px-5 md:px-0 mx-auto">
       {fullCourse.map(({ chapters, title, description }, index) => {
-
-        const validId = chapters[Number(index)]?.courseId;
-        console.log(`defineds`,validId)
+        // const validId = chapters[Number(index)]?.courseId;
+        // console.log(`defineds`,validId)
         return (
-          title !== "test" &&
-          validId && (
+          title !== "test" && (
             <CourseSchemeBox
               description={description}
               course={chapters}
