@@ -191,7 +191,11 @@ export const PayWithPayPal = async ({
   return res;
 };
 
-export const PayWithStripe = async () => {
+export const PayWithStripe = async ({
+  descriptions,
+}: {
+  descriptions: string;
+}) => {
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/stripe/create`,
     {
@@ -202,9 +206,10 @@ export const PayWithStripe = async () => {
     {
       name: "WebPips",
       productOwner: "WebPips",
-      descriptions: "Subsricption",
+      description: descriptions,
       price: 100,
       quantity: 1,
+      userId: user,
     }
   );
   return res;
@@ -259,10 +264,13 @@ export const fetchUserRegisteredCourses = async () => {
   return res;
 };
 
-export const FetchTransactionStatus = async (transactionId: string ) => {
-  const res = await HttpGetCallerWhole(`${baseUrl}/get/transaction/${transactionId}`, {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
-  });
+export const FetchTransactionStatus = async (transactionId: string) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/get/transaction/${transactionId}`,
+    {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  );
   return res;
 };

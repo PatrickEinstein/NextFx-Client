@@ -18,7 +18,7 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
   };
 
   const PayStripe = async () => {
-    const pay = await PayWithStripe();
+    const pay = await PayWithStripe({ descriptions: courseId });
     console.log(`paystripe`, pay);
     if (pay.status === true) {
       window.location.href = pay.message;
