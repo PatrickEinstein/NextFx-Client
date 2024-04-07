@@ -7,8 +7,11 @@ import {
   GetChaptersByCourseID,
   GetCourses,
 } from "../../../utils/fetches/api.fetch";
+import { useRouter } from "next/navigation";
 
 const CoursesListOverview = () => {
+  const router = useRouter();
+
   const loadConfig = {
     page: 1,
     pageSize: 10,
@@ -32,10 +35,19 @@ const CoursesListOverview = () => {
           courseId: course._id,
         };
         const chapters = await GetChaptersByCourseID(chapterLoad);
+
+        const jsonMessage = await JSON.parse(chapters.message);
+
+        if (jsonMessage?.message === "Unauthorized") {
+          // alert("Unauthorized");
+          router.push("/login");
+          return;
+        }
         setFullCourse((prevState) => [...prevState, chapters.message]);
       }
     } catch (error) {
       console.error("Error finding courses:", error);
+      alert(error);
     }
   }, []);
 
@@ -43,13 +55,11 @@ const CoursesListOverview = () => {
     FindAvailableCourses();
   }, []);
 
-
   return (
     <div className="w-full max-w-7xl px-5 md:px-0 mx-auto">
-      {fullCourse.map(({ chapters, title, description }, index) => {
-
+      {fullCourse.map(({ chapters, title, description }: any, index) => {
         const validId = chapters[Number(index)]?.courseId;
-        console.log(`defineds`,validId)
+        console.log(`defineds`, validId);
         return (
           title !== "test" &&
           validId && (

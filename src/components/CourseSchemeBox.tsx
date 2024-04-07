@@ -25,7 +25,7 @@ const CourseSchemeBox = ({
   course,
   level,
   description,
-  indexNum,
+  indexNum = 1,
   total,
 }: props) => {
   const router = useRouter();
@@ -56,7 +56,6 @@ const CourseSchemeBox = ({
         <Image src={school_badge} alt="school badge" className="h-[400px]" />
         <div className="flex flex-col gap-3 items-start">
           <p className="text-sm font-normal">
-
             Course {Number(indexNum) + Number(0)} of {Number(total)}
           </p>
           <h2 className="text-2xl font-bold">{level}</h2>
@@ -68,7 +67,6 @@ const CourseSchemeBox = ({
             {/* <Link href={`/courses/${course[Number(indexNum)]?.courseId}/chapters/${course[Number(indexNum)]?._id}`}> */}
             Start Course
             {/* </Link> */}
-
           </button>
         </div>
       </div>
@@ -81,7 +79,7 @@ const CourseSchemeBox = ({
         </div>
         <div className="w-full">
           <h2 className="text-xl font-bold mb-4">Course Outline</h2>
-          {course.map(({ title, courseId, _id }, index) => (
+          {course?.map(({ title, courseId, _id }, index) => (
             <div key={index} className="flex flex-row gap-4">
               <div className="flex items-center justify-center flex-col">
                 {/* <Link href={`/courses/${courseId}/chapters/${_id}`}> */}

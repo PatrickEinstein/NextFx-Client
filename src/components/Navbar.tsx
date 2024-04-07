@@ -7,8 +7,17 @@ import { NavLink } from "../../constants";
 import Logo from "../../public/FX.jpeg";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { UserDropDownMenuContent } from "./UserDropDownMenuContent";
+import { UserAvatar } from "./UserAvatar";
 
 export const Navbar = () => {
+  const path = usePathname();
   // return (
   //   <nav className="bg-gray-800 p-4">
   //     <div className="max-w-7xl mx-auto px-4">
@@ -72,7 +81,7 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white shadow-2xl border-b border-b-gray-200">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-0"
         aria-label="Global"
@@ -102,23 +111,38 @@ export const Navbar = () => {
         </div>
         <div className="hidden lg:flex ">
           {NavLink.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.link}
-              className="text-sm font-semibold leading-6 text-primary px-3 py-2 hover:bg-gray-200 rounded-lg"
+              className={cn(
+                "text-sm font-semibold leading-6 text-primary px-3 py-2 hover:bg-gray-200 rounded-lg",
+                path === item.link && "bg-gray-200"
+              )}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        {/* Visible section when user is not logged in */}
+
+        {/* <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:flex-row lg:gap-1">
           <Link
             href="/login"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Log in <span aria-hidden="true">&rarr;</span>
+            Log in
+          </Link>{" "}
+          |{" "}
+          <Link
+            href="/register"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
+            Register
           </Link>
-        </div>
+        </div> */}
+
+        {/* Visible section when user is logged in */}
+        <UserAvatar />
       </nav>
       <Dialog
         as="div"
@@ -153,21 +177,31 @@ export const Navbar = () => {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {NavLink.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.link}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-primary hover:bg-gray-200"
+                    className={cn(
+                      "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-primary hover:bg-gray-200",
+                      path === item.link && "bg-gray-200"
+                    )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
-              <div className="py-6">
+              <div className="py-6 flex items-center flex-row gap-1">
                 <Link
                   href="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
+                </Link>{" "}
+                |{" "}
+                <Link
+                  href="/register"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Register
                 </Link>
               </div>
             </div>
