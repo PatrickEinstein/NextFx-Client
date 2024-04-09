@@ -2,8 +2,8 @@
 
 import { HttpGetCallerWhole, HttpOTHERcaller } from "../index";
 
-const baseUrl = "http://localhost:5000";
-//  const baseUrl = "https://fxserver-1.onrender.com";
+// const baseUrl = "http://localhost:5000";
+ const baseUrl = "https://fxserver-1.onrender.com";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
@@ -179,11 +179,13 @@ export const PayWithPayPal = async ({
   descriptions: string;
 }) => {
   const user = sessionStorage.getItem("user");
+  const token = sessionStorage.getItem("token");
+
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/paypal/create`,
     {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
     "POST",
     {
@@ -196,20 +198,27 @@ export const PayWithPayPal = async ({
   return res;
 };
 
-export const PayWithStripe = async () => {
+export const PayWithStripe = async ({
+  descriptions,
+}: {
+  descriptions: string;
+}) => {
+  const user = sessionStorage.getItem("user");
+  const token = sessionStorage.getItem("token");
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/stripe/create`,
     {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
     "POST",
     {
       name: "WebPips",
       productOwner: "WebPips",
-      descriptions: "Subsricption",
+      description: descriptions,
       price: 100,
       quantity: 1,
+      userId: user,
     }
   );
   return res;
@@ -221,11 +230,13 @@ export const PayWithPelPay = async ({
   descriptions: string;
 }) => {
   const user = sessionStorage.getItem("user");
+  const token = sessionStorage.getItem("token");
+
   const res = await HttpOTHERcaller(
     `${baseUrl}/api/PelPay`,
     {
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     },
     "POST",
     {
@@ -257,6 +268,15 @@ export const PayWithPelPay = async ({
   return res;
 };
 
+export const GetUserById = async () => {
+  const token = sessionStorage.getItem("token");
+  const user = sessionStorage.getItem("user");
+  const res = await HttpGetCallerWhole(`${baseUrl}/get/user/${user}`, {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  });
+  return res;
+};
 export const fetchUserRegisteredCourses = async () => {
   const token = sessionStorage.getItem("token");
   const user = sessionStorage.getItem("user");

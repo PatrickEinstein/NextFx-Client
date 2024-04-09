@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from "react";
+import { GetUserById } from "../../utils/fetches/api.fetch";
 import { UserDropDownMenuContent } from "./UserDropDownMenuContent";
 import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -7,6 +9,19 @@ type UseAvatarProps = {
 };
 
 export const UserAvatar = ({ mobile = false }: UseAvatarProps) => {
+  const [currentUser, setCurrentUser] = useState({
+    firstName: "First Name",
+    lastName: "Last Name",
+  });
+
+  const theUser = useCallback(async () => {
+    const user = await GetUserById();
+    setCurrentUser(user.message)
+  }, []);
+
+  useEffect(() => {
+    theUser();
+  });
   return (
     <div
       className={`${
@@ -15,10 +30,10 @@ export const UserAvatar = ({ mobile = false }: UseAvatarProps) => {
     >
       <div className="flex flex-col">
         <h4 className="text-sm font-semibold leading-6 text-gray-900">
-          First Name
+          {currentUser.firstName}
         </h4>
         <span className="text-[12px] leading-[16px] font-normal text-gray-400">
-          Second Name
+          {currentUser.lastName}
         </span>
       </div>
       {/* Profile picture */}
@@ -26,7 +41,7 @@ export const UserAvatar = ({ mobile = false }: UseAvatarProps) => {
         <DropdownMenuTrigger asChild className="cursor-pointer">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" alt="user pic" />
-            <AvatarFallback>PA</AvatarFallback>
+            <AvatarFallback>{currentUser.firstName[0]}{currentUser.lastName[0]}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <UserDropDownMenuContent />

@@ -5,66 +5,49 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import {
+  GetChaptersByCourseID,
+  GetUserById,
+  fetchUserRegisteredCourses,
+} from "../../../../utils/fetches/api.fetch";
 
 const DashboardPage = () => {
   const router = useRouter();
 
-  // Demo Courses Array
-  const courses = [
+  const [reisteredCourses, setRegisteredCourses] = useState([
     {
-      id: "1",
-      userId: "user1",
-      title: "JavaScript Basics",
-      description: "Learn the basics of JavaScript programming language.",
-      imageUrl: "https://example.com/js.jpg",
-      price: 29.99,
-      isPublished: true,
-      categoryId: "1",
-      category: {
-        id: "1",
-        name: "Programming",
-      },
-      chapters: [
-        {
-          id: "1",
-          title: "Introduction to JavaScript",
-          description: "An overview of JavaScript language features.",
-          videoUrl: "https://example.com/intro_video.mp4",
-          position: 1,
-          isPublished: true,
-          isFree: true,
-        },
-
-        {
-          id: "2",
-          title: "Variables and Data Types",
-          description: "Learn how to declare variables and use data types.",
-          videoUrl: "https://example.com/intro_video.mp4",
-          position: 1,
-          isPublished: true,
-          isFree: true,
-        },
-        // Other chapters for course 1
-      ],
-      attachments: [
-        {
-          id: "1",
-          name: "Course Materials",
-          url: "https://example.com/materials.pdf",
-        },
-        // Other attachments for course 1
-      ],
-      purchases: [
-        {
-          id: "1",
-          userId: "user1",
-        },
-        // Other purchases for course 1
-      ],
-      createdAt: "2024-03-26T12:00:00Z",
-      updatedAt: "2024-03-26T12:30:00Z",
+      description: "Test",
+      courseTitle: "Test",
+      _id: "",
     },
-  ];
+  ]);
+  const [currentUser, setCurrentUser] = useState({
+    firstName:"",
+    lastName:"",
+    DateOfBirth:"",
+    email: "",
+  });
+
+  const Courses = useCallback(async () => {
+    const regs = await fetchUserRegisteredCourses();
+    const currentUser = await GetUserById();
+    setCurrentUser(currentUser.message);
+    setRegisteredCourses(regs.courses);
+  }, []);
+
+  const viewCourse = async (courseId: string) => {
+    const load = {
+      courseId: courseId,
+    };
+    const actualCourse = await GetChaptersByCourseID(load);
+    router.push(
+      `/courses/${actualCourse.message.id}/chapters/${actualCourse.message.chapters[0]._id}`
+    );
+  };
+
+  useEffect(() => {
+    Courses();
+  });
 
   return (
     <div className="px-5 w-full pb-9">
@@ -92,7 +75,7 @@ const DashboardPage = () => {
                 <Label htmlFor="firstname">Firstname</Label>
                 <Input
                   id="firstname"
-                  value={"Patrick"}
+                  value={currentUser.firstName}
                   className="w-full"
                   name="firstname"
                   disabled={true}
@@ -103,7 +86,7 @@ const DashboardPage = () => {
               <Label htmlFor="lastname">Lastname</Label>
               <Input
                 id="lastname"
-                value={"Doe"}
+                value={currentUser.lastName}
                 className="w-full"
                 name="lastname"
                 disabled={true}
@@ -114,7 +97,7 @@ const DashboardPage = () => {
                 <Label htmlFor="date">Date of Birth</Label>
                 <Input
                   id="dateOfBirth"
-                  value={"1990-01-01"}
+                  value={currentUser.DateOfBirth}
                   className="w-full"
                   name="dateOfBirth"
                   type="date"
@@ -126,7 +109,7 @@ const DashboardPage = () => {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                value={"patrickeistein@gmail.com"}
+                value={currentUser.email}
                 className="w-full"
                 name="email"
                 disabled={true}
@@ -149,37 +132,43 @@ const DashboardPage = () => {
 
           {/* Courses */}
 
-          {courses.map((course, index: number) => (
-            <div
-              className="w-full flex flex-row items-center gap-3"
-              key={index}
-            >
-              <Separator
-                orientation="vertical"
-                className="h-full w-1 bg-primary"
-              />
+          {reisteredCourses.map(
+            ({ courseTitle, description, _id }, index: number) =>
+              courseTitle != "Test" && (
+                <div
+                  className="w-full flex flex-row items-center gap-3"
+                  key={index}
+                >
+                  <Separator
+                    orientation="vertical"
+                    className="h-full w-1 bg-primary"
+                  />
 
-              <div
-                key={index}
-                className="w-full flex flex-row items-start justify-between gap-3 p-4 border border-gray-200 rounded-md"
-              >
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-xl font-semibold text-primary">
-                    {course?.title}
-                  </h3>
-                  <p className="text-gray-600">
-                    category: {course?.category?.name}
-                  </p>
-                </div>
+                  <div
+                    key={index}
+                    className="w-full flex flex-row items-start justify-between gap-3 p-4 border border-gray-200 rounded-md"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <h3 className="text-xl font-semibold text-primary">
+                        {courseTitle}
+                      </h3>
+                      <p className="text-gray-600">
+                        {/* category: {course?.category?.name} */}
+                      </p>
+                    </div>
 
-                <div className="flex items-end justify-end flex-col gap-2">
-                  <button className="flex items-center justify-center bg-primary py-2 px-4 rounded-lg cursor-pointer text-white">
-                    View
-                  </button>
+                    <div className="flex items-end justify-end flex-col gap-2">
+                      <button
+                        onClick={() => viewCourse(_id)}
+                        className="flex items-center justify-center bg-primary py-2 px-4 rounded-lg cursor-pointer text-white"
+                      >
+                        View
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              )
+          )}
         </div>
       </div>
     </div>

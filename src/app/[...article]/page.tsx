@@ -9,11 +9,11 @@ import Footer from "@/components/NewFooter";
 //   children: React.ReactNode;
 //   params: { article: [articleId: string, News: string] };
 // };
-type ViewArticleProps = {
-  children?: React.ReactNode;
-  params: { article: string[] };
-};
-const ViewArticlePage = ({ params }: ViewArticleProps) => {
+interface ViewArticleProps {
+  params: { article: [string, string] };
+}
+
+const ViewArticlePage: React.FC<ViewArticleProps> = ({ params }) => {
   const News = params.article[0];
   const articleId = params.article[1];
 

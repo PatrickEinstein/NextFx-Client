@@ -37,7 +37,7 @@ const CourseSchemeBox = ({
     const check = findIfRegistered.courses.find(
       (object: any) => object._id == course[Number(indexNum)]?.courseId
     );
-    console.log({ check });
+    // console.log({ check });
     if (check) {
       router.push(
         `/courses/${course[Number(indexNum)]?.courseId}/chapters/${
@@ -45,7 +45,7 @@ const CourseSchemeBox = ({
         }`
       );
     } else {
-      console.log({ cid: course[Number(indexNum)] });
+      // console.log({ cid: course[Number(indexNum)] });
       router.push(`/enroll/${course[Number(indexNum)]?.courseId}`);
     }
   };

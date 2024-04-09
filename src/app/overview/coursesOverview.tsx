@@ -36,9 +36,9 @@ const CoursesListOverview = () => {
         };
         const chapters = await GetChaptersByCourseID(chapterLoad);
 
-        const jsonMessage = await JSON.parse(chapters.message);
+        // const jsonMessage = await JSON.parse(chapters.message);
 
-        if (jsonMessage?.message === "Unauthorized") {
+        if (chapters?.message === "Unauthorized") {
           // alert("Unauthorized");
           router.push("/login");
           return;
@@ -57,12 +57,11 @@ const CoursesListOverview = () => {
 
   return (
     <div className="w-full max-w-7xl px-5 md:px-0 mx-auto">
-      {fullCourse.map(({ chapters, title, description }: any, index) => {
-        const validId = chapters[Number(index)]?.courseId;
-        console.log(`defineds`, validId);
+      {fullCourse.map(({ chapters, title, description }, index) => {
+        // const validId = chapters[Number(index)]?.courseId;
+        // console.log(`defineds`,validId)
         return (
-          title !== "test" &&
-          validId && (
+          title !== "test" && (
             <CourseSchemeBox
               description={description}
               course={chapters}

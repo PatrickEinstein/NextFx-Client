@@ -57,7 +57,8 @@ export default function ConfirmationPage({
 
       <main className="flex flex-col items-center space-y-8">
         <h1 className="text-3xl font-bold text-gray-800">
-          Payment Successful!
+          Payment {purchase.state?.toUpperCase() || "DECLINED"}
+
         </h1>
         <p className="text-lg text-gray-600">
           {" "}

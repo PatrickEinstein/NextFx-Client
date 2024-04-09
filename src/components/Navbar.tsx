@@ -20,6 +20,8 @@ export const Navbar = () => {
   const path = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<string | null>(null);
+  const isLoggedInuser = sessionStorage.getItem("user");
+
 
   useEffect(() => {
     const user = sessionStorage.getItem("user");
@@ -85,7 +87,7 @@ export const Navbar = () => {
         </div>
         {/* Visible section when user is not logged in */}
 
-        {user === null ? (
+        {!isLoggedInuser ? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:flex-row lg:gap-1">
             <Link
               href="/login"
