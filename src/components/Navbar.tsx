@@ -35,7 +35,7 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <header className="bg-white shadow-2xl border-b border-b-gray-200">
+    <header className="bg-white w-full border-b border-b-gray-200">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-0"
         aria-label="Global"
