@@ -5,6 +5,7 @@ import Logo from "../../../public/AuthImg.svg";
 import Logo3 from "../../../public/RegisterImg.svg";
 import Image from "next/image";
 import { usePathname, redirect } from "next/navigation";
+import { useEffect } from "react";
 
 type AuthPagesProps = {
   children: React.ReactNode;
@@ -13,12 +14,14 @@ type AuthPagesProps = {
 const AuthPages = ({ children }: AuthPagesProps) => {
   const path = usePathname();
 
-  const user = sessionStorage.getItem("user");
+  useEffect(() => {
+    const user = sessionStorage.getItem("user");
 
-  if (user !== null && (path === "/login" || path === "/register")) {
-    // window.location.href = "/";
-    redirect("/dashboard");
-  }
+    if (user !== null && (path === "/login" || path === "/register")) {
+      // window.location.href = "/";
+      redirect("/dashboard");
+    }
+  }, [path]);
 
   return (
     <div className="h-full w-full">
