@@ -2,6 +2,8 @@
 
 import Head from "next/head";
 import {
+  FetchTransactionStatus,
+  GetChaptersByCourseID,
   PayWithPayPal,
   PayWithPelPay,
   PayWithStripe,
@@ -16,7 +18,7 @@ import {
 import { useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -37,17 +39,6 @@ import {
 } from "@/components/ui/dialog";
 import { SelectPaymentOption } from "./_components/SelectPaymentOption";
 
-const BuyCourseButton = () => {
-  return (
-    <button
-      className="w-full px-3 py-2 text-sm bg-primary text-white font-medium rounded-lg"
-      type="button"
-      disabled={false}
-    >
-      Buy Course
-    </button>
-  );
-};
 
 const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
   const [open, setOpen] = useState(false);
@@ -57,28 +48,26 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
 
   const router = useRouter();
 
-  const PayPal = async () => {
-    const pay = await PayWithPayPal({ descriptions: courseId });
-    console.log(`paypal`, pay);
-    if (pay.status === true) {
-      window.location.href = pay.message;
-    }
-  };
 
-  const PayStripe = async () => {
-    const pay = await PayWithStripe({ descriptions: courseId });
-    console.log(`paystripe`, pay);
-    if (pay.status === true) {
-      window.location.href = pay.message;
-    }
-  };
-  const PelPay = async () => {
-    const pay = await PayWithPelPay({ descriptions: courseId });
-    console.log(`pelpay`, pay);
-    if (pay.status === true) {
-      window.location.href = pay.message;
-    }
-  };
+
+  const [course, setCourse] = useState({
+    title: "",
+    description: "",
+    chapters: [],
+  });
+
+  const QueryTransaction = useCallback(async () => {
+    const load = {
+      courseId: courseId,
+    };
+    const course = await GetChaptersByCourseID(load);
+    setCourse(course.message);
+  }, []);
+
+  useEffect(() => {
+    QueryTransaction();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
       <Head>
@@ -111,19 +100,21 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
               <div className="w-full flex flex-row items-center justify-between">
                 <p className="text-sm font-medium">Course Title: </p>
                 <span className="font-normal text-sm text-right">
-                  JavaScript programming.
+                  {course.title}
                 </span>
               </div>
               <div className="w-full flex flex-row items-center justify-between">
                 <p className="text-sm font-medium">Course Description: </p>
                 <span className="font-normal text-sm text-right">
-                  Learn the basics of JavaScript programming language.
+                  {course.description}
                 </span>
               </div>
               <div className="w-full flex flex-row items-center justify-between">
                 <p className="text-sm font-medium">Chapters:</p>
 
-                <span className="text-sm font-normal text-right">3</span>
+                <span className="text-sm font-normal text-right">
+                  {course.chapters.length}
+                </span>
               </div>
             </div>
           </div>
@@ -138,7 +129,7 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
               <Separator className="w-full bg-gray-400" />
               <div className="w-full flex flex-row items-center justify-between gap-4 px-4 py-2">
                 <p className="text-sm font-medium">Total: </p>
-                <span className="font-normal text-sm">$29.99</span>
+                <span className="font-normal text-sm">$99.9</span>
               </div>
             </div>
             {isDesktop ? (
