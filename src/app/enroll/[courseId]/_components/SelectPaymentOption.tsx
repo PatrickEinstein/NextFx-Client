@@ -16,11 +16,25 @@ export interface SelectPaymentOptionProps {
 export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
   const paymentOptions = [
     {
-      id: "2",
+      id: "3",
+      name: "Pay with PelPay",
+      description: "Pay with your Pelpay account",
+      icon: "/Pelpay.jpeg",
+      onclick: async () => {
+        const pay = await PayWithPelPay({ descriptions: courseId });
+        console.log(`pelpay`, pay);
+        if (pay.status === true) {
+          window.location.href = pay.message;
+        }
+      },
+    },
+    {
+      id: "1",
       name: "Pay with Stripe",
       description: "Pay with your credit card.",
       icon: "/Stripe.svg",
       onClick: async () => {
+        // console.log("Pay with Stripe hit");
         const pay = await PayWithStripe({ descriptions: courseId });
         console.log(`paystripe`, pay);
         if (pay.status === true) {
@@ -34,21 +48,9 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
       description: "Pay with your PayPal account.",
       icon: "/Paypal.svg",
       onClick: async () => {
+        // console.log("Pay with PayPal hit");
         const pay = await PayWithPayPal({ descriptions: courseId });
         console.log(`paypal`, pay);
-        if (pay.status === true) {
-          window.location.href = pay.message;
-        }
-      },
-    },
-    {
-      id: "3",
-      name: "Pay with PelPay",
-      description: "Pay with your Pelpay account",
-      icon: "/Pelpay.jpeg",
-      onclick: async () => {
-        const pay = await PayWithPelPay({ descriptions: courseId });
-        console.log(`pelpay`, pay);
         if (pay.status === true) {
           window.location.href = pay.message;
         }
