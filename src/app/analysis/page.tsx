@@ -10,13 +10,16 @@ import RootLayout from "../layout";
 import Footer from "@/components/NewFooter";
 import { AnalysisSkeleton } from "./_components/AnalysisSkeleton";
 import { AnalysisHero } from "./_components/AnalysisHero";
+import { useUserStore } from "@/store";
 
 const AnalysesPage = () => {
   const [news, SetNews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = useUserStore((state) => state.token);
   let load = {
     page: 1,
     pageSize: 10,
+    token,
   };
   const newsGot = useCallback(async () => {
     setLoading(true);

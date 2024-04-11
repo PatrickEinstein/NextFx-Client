@@ -9,6 +9,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 import { Login } from "../../../../utils/fetches/api.fetch";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useUserStore } from "@/store";
 
 interface UserInfo {
   email: string;
@@ -21,6 +22,9 @@ const LoginPage = () => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
+
+  const updateToken = useUserStore((state) => state.updateToken);
+  const updateUser = useUserStore((state) => state.updateUser);
 
   const onSetUserInfo = (
     e: ChangeEvent<HTMLInputElement>,
@@ -37,8 +41,10 @@ const LoginPage = () => {
     setLoading(true);
     const login = await Login(userInfo);
     if (login.status === true) {
-      sessionStorage.setItem("token", login.response);
-      sessionStorage.setItem("user", login.user);
+      // sessionStorage.setItem("token", login.response);
+      // sessionStorage.setItem("user", login.user);
+      updateToken(login.response);
+      updateUser(login.user);
 
       setLoading(false);
       toast({

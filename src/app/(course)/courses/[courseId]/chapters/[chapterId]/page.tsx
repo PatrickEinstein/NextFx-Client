@@ -16,6 +16,7 @@ import {
   GetCourseAndChapters,
 } from "../../../../../../../utils/fetches/api.fetch";
 import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
+import { useUserStore } from "@/store";
 // import { CourseProgressButton } from "./_components/course-progress-button";
 
 const ChapterIdPage = ({
@@ -24,8 +25,11 @@ const ChapterIdPage = ({
   params: { courseId: string; chapterId: string };
 }) => {
   const { courseId, chapterId } = params;
+  const token = useUserStore((state) => state.token);
+
   const load = {
     courseId: chapterId,
+    token,
   };
 
   const [chapter, setChapter] = useState({

@@ -8,12 +8,16 @@ import {
   PayWithPelPay,
   PayWithStripe,
 } from "../../../../../utils/fetches/api.fetch";
+import { useUserStore } from "@/store";
 
 export interface SelectPaymentOptionProps {
   courseId: string;
 }
 
 export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
+  const token = useUserStore((state) => state.token);
+  const user = useUserStore((state) => state.user);
+
   const paymentOptions = [
     {
       id: "1",
@@ -22,7 +26,11 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
       icon: "/Stripe.svg",
       onClick: async () => {
         // console.log("Pay with Stripe hit");
-        const pay = await PayWithStripe({ descriptions: courseId });
+        const pay = await PayWithStripe({
+          descriptions: courseId,
+          token,
+          user,
+        });
         console.log(`paystripe`, pay);
         if (pay.status === true) {
           window.location.href = pay.message;
@@ -36,7 +44,11 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
       icon: "/Paypal.svg",
       onClick: async () => {
         // console.log("Pay with PayPal hit");
-        const pay = await PayWithPayPal({ descriptions: courseId });
+        const pay = await PayWithPayPal({
+          descriptions: courseId,
+          token,
+          user,
+        });
         console.log(`paypal`, pay);
         if (pay.status === true) {
           window.location.href = pay.message;
@@ -49,7 +61,11 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
       description: "Pay with your Pelpay account",
       icon: "/Pelpay.jpeg",
       onClick: async () => {
-        const pay = await PayWithPelPay({ descriptions: courseId });
+        const pay = await PayWithPelPay({
+          descriptions: courseId,
+          token,
+          user,
+        });
         console.log(`pelpay`, pay);
         if (pay.status === true) {
           window.location.href = pay.message;

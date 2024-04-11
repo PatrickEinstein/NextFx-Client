@@ -8,11 +8,14 @@ import { Input } from "@/components/ui/input";
 import {
   GetChaptersByCourseID,
   GetUserById,
-  fetchUserRegisteredCourses,
+  FetchUserRegisteredCourses,
 } from "../../../../utils/fetches/api.fetch";
+import { useUserStore } from "@/store";
 
 const DashboardPage = () => {
   const router = useRouter();
+  const token = useUserStore((state) => state.token);
+  const userId = useUserStore((state) => state.user);
 
   const [reisteredCourses, setRegisteredCourses] = useState([
     {
@@ -22,15 +25,15 @@ const DashboardPage = () => {
     },
   ]);
   const [currentUser, setCurrentUser] = useState({
-    firstName:"",
-    lastName:"",
-    DateOfBirth:"",
+    firstName: "",
+    lastName: "",
+    DateOfBirth: "",
     email: "",
   });
 
   const Courses = useCallback(async () => {
-    const regs = await fetchUserRegisteredCourses();
-    const currentUser = await GetUserById();
+    const regs = await FetchUserRegisteredCourses(token, userId);
+    const currentUser = await GetUserById(token, userId);
     setCurrentUser(currentUser.message);
     setRegisteredCourses(regs.courses);
   }, []);
@@ -38,6 +41,7 @@ const DashboardPage = () => {
   const viewCourse = async (courseId: string) => {
     const load = {
       courseId: courseId,
+      token,
     };
     const actualCourse = await GetChaptersByCourseID(load);
     router.push(
@@ -132,7 +136,7 @@ const DashboardPage = () => {
 
           {/* Courses */}
 
-          {reisteredCourses.map(
+          {reisteredCourses?.map(
             ({ courseTitle, description, _id }, index: number) =>
               courseTitle != "Test" && (
                 <div

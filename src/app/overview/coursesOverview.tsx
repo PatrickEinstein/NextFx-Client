@@ -8,13 +8,16 @@ import {
   GetCourses,
 } from "../../../utils/fetches/api.fetch";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store";
 
 const CoursesListOverview = () => {
   const router = useRouter();
+  const token = useUserStore((state) => state.token);
 
   const loadConfig = {
     page: 1,
     pageSize: 10,
+    token,
   };
 
   const [fullCourse, setFullCourse] = useState([
@@ -33,6 +36,7 @@ const CoursesListOverview = () => {
       for (let course of foundCourses.message) {
         const chapterLoad = {
           courseId: course._id,
+          token,
         };
         const chapters = await GetChaptersByCourseID(chapterLoad);
 

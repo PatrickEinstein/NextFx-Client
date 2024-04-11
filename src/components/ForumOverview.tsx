@@ -2,12 +2,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ForumBlogBox } from "./ForumBlogBox";
 import { Threads } from "../../utils/fetches/api.fetch";
+import { useUserStore } from "@/store";
 
 export const ForumOverView = () => {
+  const token = useUserStore((state) => state.token);
+  const user = useUserStore((state) => state.user);
   const [forum, SetForum] = useState([]);
   let load = {
     page: 1,
     pageSize: 10,
+    token,
   };
   const ForumGot = useCallback(async () => {
     const newForum = await Threads(load);
