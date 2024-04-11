@@ -4,8 +4,9 @@ import school_badge from "../../public/badge2.png";
 import play from "../../public/play.svg";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
-import { fetchUserRegisteredCourses } from "../../utils/fetches/api.fetch";
+import { FetchUserRegisteredCourses } from "../../utils/fetches/api.fetch";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store";
 
 type course = {
   title: string;
@@ -29,11 +30,13 @@ const CourseSchemeBox = ({
   total,
 }: props) => {
   const router = useRouter();
+  const token = useUserStore((state) => state.token);
+  const user = useUserStore((state) => state.user);
   // const id = course[Number(indexNum)]?.courseId
   // console.log({ cid:id , indexNum, course });
 
   const onViewCourseOrPayFirst = async () => {
-    const findIfRegistered = await fetchUserRegisteredCourses();
+    const findIfRegistered = await FetchUserRegisteredCourses(token, user);
     const check = findIfRegistered.courses.find(
       (object: any) => object._id == course[Number(indexNum)]?.courseId
     );
@@ -88,7 +91,10 @@ const CourseSchemeBox = ({
                   alt="play"
                   className="h-[30px] w-[30px] cursor-pointer"
                   onClick={async () => {
-                    const findIfRegistered = await fetchUserRegisteredCourses();
+                    const findIfRegistered = await FetchUserRegisteredCourses(
+                      token,
+                      user
+                    );
                     const check = findIfRegistered.courses.find(
                       (object: any) =>
                         object._id == course[Number(indexNum)]?.courseId

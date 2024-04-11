@@ -15,24 +15,26 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UserDropDownMenuContent } from "./UserDropDownMenuContent";
 import { UserAvatar } from "./UserAvatar";
+import { useUserStore } from "@/store";
 
 export const Navbar = () => {
   const path = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<string | null>(null);
-  const isLoggedInuser = sessionStorage.getItem("user");
+  // const [user, setUser] = useState<string | null>(null);
+  const user = useUserStore((state) => state.user);
+  console.log(user);
+  const isLoggedInUser = user === null ? false : true;
 
+  // useEffect(() => {
+  //   const user = sessionStorage.getItem("user");
 
-  useEffect(() => {
-    const user = sessionStorage.getItem("user");
+  //   setUser(user);
 
-    setUser(user);
-
-    if (user !== null && (path === "/login" || path === "/register")) {
-      // window.location.href = "/";
-      // route
-    }
-  }, []);
+  //   if (user !== null && (path === "/login" || path === "/register")) {
+  //     // window.location.href = "/";
+  //     // route
+  //   }
+  // }, []);
 
   return (
     <header className="bg-white w-full border-b border-b-gray-200">
@@ -87,7 +89,7 @@ export const Navbar = () => {
         </div>
         {/* Visible section when user is not logged in */}
 
-        {!isLoggedInuser ? (
+        {isLoggedInUser === false ? (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:flex-row lg:gap-1">
             <Link
               href="/login"

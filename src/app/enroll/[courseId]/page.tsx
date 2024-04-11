@@ -38,17 +38,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { SelectPaymentOption } from "./_components/SelectPaymentOption";
-
+import { useUserStore } from "@/store";
 
 const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const token = useUserStore((state) => state.token);
 
   const { courseId } = params;
 
   const router = useRouter();
-
-
 
   const [course, setCourse] = useState({
     title: "",
@@ -59,6 +58,7 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
   const QueryTransaction = useCallback(async () => {
     const load = {
       courseId: courseId,
+      token,
     };
     const course = await GetChaptersByCourseID(load);
     setCourse(course.message);

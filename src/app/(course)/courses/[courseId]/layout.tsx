@@ -9,6 +9,7 @@ import CourseNavbar from "./_components/course-navbar";
 import { useCallback, useEffect, useState } from "react";
 import { GetCourseAndChapters } from "../../../../../utils/fetches/api.fetch";
 import { Navbar } from "@/components";
+import { useUserStore } from "@/store";
 
 const CourseLayout = ({
   children,
@@ -18,23 +19,22 @@ const CourseLayout = ({
   params: { courseId: string };
 }) => {
   const { courseId } = params;
-
+  const token = useUserStore((state) => state.token);
 
   const load = {
     courseId: courseId,
+    token: token,
   };
   const [content, SetCourse] = useState({});
   const newsGot = useCallback(async () => {
     try {
       const newNews = await GetCourseAndChapters(load);
       SetCourse(newNews?.message);
-    } catch (error: any) {
-    }
+    } catch (error: any) {}
   }, []);
   useEffect(() => {
     newsGot();
   }, []);
-  
 
   if (!content) {
     return redirect("/");

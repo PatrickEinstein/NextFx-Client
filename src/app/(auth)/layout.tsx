@@ -6,6 +6,7 @@ import Logo3 from "../../../public/RegisterImg.svg";
 import Image from "next/image";
 import { usePathname, redirect } from "next/navigation";
 import { useEffect } from "react";
+import { useUserStore } from "@/store";
 
 type AuthPagesProps = {
   children: React.ReactNode;
@@ -13,10 +14,9 @@ type AuthPagesProps = {
 
 const AuthPages = ({ children }: AuthPagesProps) => {
   const path = usePathname();
+  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
-    const user = sessionStorage.getItem("user");
-
     if (user !== null && (path === "/login" || path === "/register")) {
       // window.location.href = "/";
       redirect("/dashboard");

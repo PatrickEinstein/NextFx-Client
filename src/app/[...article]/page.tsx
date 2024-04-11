@@ -1,25 +1,28 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getAnArticle } from "../../../utils/fetches/api.fetch";
+import { GetAnArticle } from "../../../utils/fetches/api.fetch";
 import { Navbar } from "@/components";
 import Footer from "@/components/NewFooter";
+import { useUserStore } from "@/store";
 
 // type ViewArticleProps = {
 //   children: React.ReactNode;
 //   params: { article: [articleId: string, News: string] };
 // };
 interface ViewArticleProps {
-  params: { article: [string, string] };
+  params: { article: string[] };
 }
 
 const ViewArticlePage: React.FC<ViewArticleProps> = ({ params }) => {
   const News = params.article[0];
   const articleId = params.article[1];
+  const token = useUserStore((state) => state.token);
 
   const load = {
     id: articleId,
     article: News,
+    token,
   };
   const [article, setArticle] = useState({
     name: "",
@@ -47,7 +50,7 @@ const ViewArticlePage: React.FC<ViewArticleProps> = ({ params }) => {
   // console.log(article);
 
   const getArticle = useCallback(async () => {
-    const res = await getAnArticle(load);
+    const res = await GetAnArticle(load);
     setArticle(res.message);
   }, [articleId]);
 
