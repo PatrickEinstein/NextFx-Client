@@ -249,7 +249,7 @@ export const PayWithPelPay = async ({
       currency: "USD",
       merchantRef: "13277654324537993",
       narration: descriptions,
-      callBackUrl: "http://localhost:5000/api/pelpaycallback",
+      callBackUrl: `${baseUrl}/api/pelpaycallback`,
       splitCode: "",
       houldTokenizeCard: false,
       customer: {
