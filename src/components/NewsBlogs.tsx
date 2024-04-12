@@ -2,12 +2,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { NewsBlogsBox } from "./NewsBlogsBox";
 import { CurrencyNews } from "../../utils/fetches/api.fetch";
+import { useUserStore } from "@/store";
 
 export const NewBlogs = () => {
+  const token = useUserStore((state) => state.token);
+
   const [news, SetNews] = useState([]);
+
   let load = {
     page: 1,
     pageSize: 10,
+    token,
   };
   const newsGot = useCallback(async () => {
     const newNews = await CurrencyNews(load);

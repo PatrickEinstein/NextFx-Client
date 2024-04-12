@@ -5,13 +5,16 @@ import { Navbar } from "@/components";
 import Footer from "@/components/NewFooter";
 import { AnalysisHero } from "../analysis/_components/AnalysisHero";
 import { TradingSkeleton } from "./_components/TradingSkeleton";
+import { useUserStore } from "@/store";
 
 const Trading = () => {
   const [news, SetNews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = useUserStore((state) => state.token);
   let load = {
     page: 1,
     pageSize: 10,
+    token,
   };
   const newsGot = useCallback(async () => {
     setLoading(true);
