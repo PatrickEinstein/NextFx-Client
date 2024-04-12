@@ -20,7 +20,7 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
       name: "Pay with PelPay",
       description: "Pay with your Pelpay account",
       icon: "/Pelpay.jpeg",
-      onclick: async () => {
+      onClick: async () => {
         const pay = await PayWithPelPay({ descriptions: courseId });
         console.log(`pelpay`, pay);
         if (pay.status === true) {
