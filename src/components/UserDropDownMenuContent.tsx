@@ -19,12 +19,16 @@ import {
   DropdownMenuShortcut,
 } from "./ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store";
 
 export const UserDropDownMenuContent = () => {
   const router = useRouter();
+  const updateToken = useUserStore((state) => state.updateToken);
+  const updateUser = useUserStore((state) => state.updateUser);
+
   const logout = () => {
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("token");
+    updateToken(null);
+    updateUser(null);
     router.push("/login");
   };
 
@@ -48,16 +52,19 @@ export const UserDropDownMenuContent = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const user = sessionStorage.getItem("user");
+  const user = useUserStore((state) => state.user);
 
   return (
     <DropdownMenuContent className="w-56" align={alignValue}>
       <DropdownMenuLabel>My Account</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem className="cursor-pointer" onClick={()=>router.push(`/dashboard/${user}`)}>
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => router.push(`/dashboard/${user}`)}
+        >
           <LayoutDashboard className="mr-2 h-4 w-4" />
-          <span >Dashboard</span>
+          <span>Dashboard</span>
         </DropdownMenuItem>
         {/* <DropdownMenuItem className="cursor-pointer">
           <User className="mr-2 h-4 w-4" />

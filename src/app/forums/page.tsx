@@ -4,8 +4,11 @@ import { Separator } from "@/components/ui/separator";
 import React, { useCallback, useEffect, useState } from "react";
 import { Threads } from "../../../utils/fetches/api.fetch";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/store";
 
 const TestPage = () => {
+  const token = useUserStore((state) => state.token);
+
   const [forum, SetForum] = useState([
     {
       forum: {
@@ -19,6 +22,7 @@ const TestPage = () => {
   let load = {
     page: 1,
     pageSize: 10,
+    token
   };
   const ForumGot = useCallback(async () => {
     const newForum = await Threads(load);

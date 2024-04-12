@@ -1,16 +1,18 @@
-
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
 import { AdminBlogsBox } from "./AdminBlogsBox";
 import { CurrencyTechnicalAnalysis } from "../../utils/fetches/api.fetch";
 import { AdminBlogsPosts } from "../../constants";
+import { useUserStore } from "@/store";
 
 export const AdminBlogs = () => {
   const [news, SetNews] = useState([]);
+  const token = useUserStore((state) => state.token);
   const load = {
-    page:1,
-    pageSize:10
+    page: 1,
+    pageSize: 10,
+    token,
   };
   const newsGot = useCallback(async () => {
     const newNews = await CurrencyTechnicalAnalysis(load);
