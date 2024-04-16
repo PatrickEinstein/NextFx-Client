@@ -20,6 +20,7 @@ type props = {
   indexNum?: number;
   description: string;
   total: Number;
+  id: string;
 };
 
 const CourseSchemeBox = ({
@@ -28,28 +29,37 @@ const CourseSchemeBox = ({
   description,
   indexNum = 1,
   total,
+  id,
 }: props) => {
   const router = useRouter();
   const token = useUserStore((state) => state.token);
   const user = useUserStore((state) => state.user);
+
   // const id = course[Number(indexNum)]?.courseId
   // console.log({ cid:id , indexNum, course });
 
   const onViewCourseOrPayFirst = async () => {
+    console.log({ token, user });
+
+    if (!user || !token) {
+      router.push("/login");
+    }
+
     const findIfRegistered = await FetchUserRegisteredCourses(token, user);
     const check = findIfRegistered.courses.find(
-      (object: any) => object._id == course[Number(indexNum)]?.courseId
+      (object: any) => object._id == id
+      // (object: any) => object._id == course[Number(indexNum)]?.courseId
     );
-    // console.log({ check });
+    console.log({ check });
     if (check) {
-      router.push(
-        `/courses/${course[Number(indexNum)]?.courseId}/chapters/${
-          course[Number(indexNum)]?._id
-        }`
-      );
+      router.push(`/courses/${id}/chapters/${course[Number(indexNum)]?._id}`);
+      // `/courses/${course[Number(indexNum)]?.courseId}/chapters/${
+      //   course[Number(indexNum)]?._id
+      // }`
     } else {
       // console.log({ cid: course[Number(indexNum)] });
-      router.push(`/enroll/${course[Number(indexNum)]?.courseId}`);
+      router.push(`/enroll/${id}`);
+      // router.push(`/enroll/${course[Number(indexNum)]?.courseId}`);
     }
   };
 
@@ -67,9 +77,7 @@ const CourseSchemeBox = ({
             className="py-2 px-4 bg-secondary text-primary font-semibold rounded-[40px]"
             onClick={onViewCourseOrPayFirst}
           >
-            {/* <Link href={`/courses/${course[Number(indexNum)]?.courseId}/chapters/${course[Number(indexNum)]?._id}`}> */}
             Start Course
-            {/* </Link> */}
           </button>
         </div>
       </div>
@@ -99,7 +107,6 @@ const CourseSchemeBox = ({
                       (object: any) =>
                         object._id == course[Number(indexNum)]?.courseId
                     );
-                    console.log({ check });
                     if (check) {
                       router.push(`/courses/${courseId}/chapters/${_id}`);
                     } else {
