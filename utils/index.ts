@@ -5,13 +5,8 @@ export const HttpGetCallerWhole = async (endpoint: any, headers: any) => {
       headers: headers,
     });
 
-    if (!savedUserResponse.ok) {
-      const errorData = await savedUserResponse.text();
-      throw new Error(errorData);
-    }
-
     const responseData = await savedUserResponse.json();
-    // const Res = JSON.parse(responseData);
+
     return responseData;
   } catch (err) {
     return err;
@@ -31,13 +26,8 @@ export const HttpOTHERcaller = async (
       body: JSON.stringify(body),
     });
 
-    if (!savedUserResponse.ok) {
-      const errorData = await savedUserResponse.text();
-      throw new Error(errorData);
-    }
-
     const responseData = await savedUserResponse.json();
-    // const Res = JSON.parse(responseData);
+
     return responseData;
   } catch (err) {
     return err;

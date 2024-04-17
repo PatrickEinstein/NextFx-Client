@@ -3,8 +3,8 @@
 import { useUserStore } from "@/store";
 import { HttpGetCallerWhole, HttpOTHERcaller } from "../index";
 
-const baseUrl = "http://localhost:5000";
-//  const baseUrl = "https://fxserver-1.onrender.com";
+// const baseUrl = "http://localhost:5000";
+ const baseUrl = "https://forexserver.onrender.com";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
@@ -249,7 +249,7 @@ export const PayWithPelPay = async ({
       currency: "USD",
       merchantRef: "13277654324537993",
       narration: descriptions,
-      callBackUrl: "http://localhost:5000/api/pelpaycallback",
+      callBackUrl: `${baseUrl}/api/pelpaycallback`,
       splitCode: "",
       houldTokenizeCard: false,
       customer: {

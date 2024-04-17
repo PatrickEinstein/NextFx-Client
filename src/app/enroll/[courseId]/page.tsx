@@ -52,7 +52,10 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
   const [course, setCourse] = useState({
     title: "",
     description: "",
-    chapters: [],
+    chapters: [{
+      title:"",
+      description: "",
+    }],
   });
 
   const QueryTransaction = useCallback(async () => {
@@ -113,7 +116,7 @@ const PaymentOptionsPage = ({ params }: { params: { courseId: string } }) => {
                 <p className="text-sm font-medium">Chapters:</p>
 
                 <span className="text-sm font-normal text-right">
-                  {course.chapters.length}
+                  {course?.chapters?.length}
                 </span>
               </div>
             </div>

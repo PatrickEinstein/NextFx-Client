@@ -8,7 +8,7 @@ const Monitor = () => {
       <Image src={school_badge} alt="school badge" className="" />
       <div className="flex flex-col gap-3 items-center">
         <h2 className="text-3xl font-bold mb-">
-          0 <span className="font-normal">of</span> 361
+          0 <span className="font-normal">of</span> 21
         </h2>
         <span className="py-2 px-6 bg-gray-400 text-white rounded-[40px]">
           Lessons Completed

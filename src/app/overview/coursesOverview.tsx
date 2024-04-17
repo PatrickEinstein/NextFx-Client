@@ -28,7 +28,9 @@ const CoursesListOverview = () => {
       chapters: [],
     },
   ]);
-  const total = fullCourse.length;
+  const total = fullCourse.length || 0;
+
+  console.log({ fullCourse });
 
   const FindAvailableCourses = useCallback(async () => {
     try {
@@ -39,14 +41,14 @@ const CoursesListOverview = () => {
           token,
         };
         const chapters = await GetChaptersByCourseID(chapterLoad);
-
-        // const jsonMessage = await JSON.parse(chapters.message);
-
         if (chapters?.message === "Unauthorized") {
-          // alert("Unauthorized");
           router.push("/login");
           return;
         }
+        var Exist: any = fullCourse.find(
+          (obj: any) => (obj.title = chapters.message.title)
+        );
+
         setFullCourse((prevState) => [...prevState, chapters.message]);
       }
     } catch (error) {
@@ -61,9 +63,8 @@ const CoursesListOverview = () => {
 
   return (
     <div className="w-full max-w-7xl px-5 md:px-0 mx-auto">
-      {fullCourse.map(({ chapters, title, description }, index) => {
-        // const validId = chapters[Number(index)]?.courseId;
-        // console.log(`defineds`,validId)
+      {fullCourse.map(({ chapters, title, description, id }, index) => {
+        // console.log(`chapters`, chapters);
         return (
           title !== "test" && (
             <CourseSchemeBox
@@ -71,6 +72,7 @@ const CoursesListOverview = () => {
               course={chapters}
               level={title}
               total={total}
+              id={id}
               // total={totalnew}
               key={index}
               indexNum={index}

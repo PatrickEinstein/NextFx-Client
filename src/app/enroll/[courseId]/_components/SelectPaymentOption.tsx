@@ -19,24 +19,24 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
   const user = useUserStore((state) => state.user);
 
   const paymentOptions = [
-    {
-      id: "1",
-      name: "Pay with Stripe",
-      description: "Pay with your credit card.",
-      icon: "/Stripe.svg",
-      onClick: async () => {
-        // console.log("Pay with Stripe hit");
-        const pay = await PayWithStripe({
-          descriptions: courseId,
-          token,
-          user,
-        });
-        console.log(`paystripe`, pay);
-        if (pay.status === true) {
-          window.location.href = pay.message;
-        }
-      },
-    },
+    // {
+    //   id: "1",
+    //   name: "Pay with Stripe",
+    //   description: "Pay with your credit card.",
+    //   icon: "/Stripe.svg",
+    //   onClick: async () => {
+    //     // console.log("Pay with Stripe hit");
+    //     const pay = await PayWithStripe({
+    //       descriptions: courseId,
+    //       token,
+    //       user,
+    //     });
+    //     console.log(`paystripe`, pay);
+    //     if (pay.status === true) {
+    //       window.location.href = pay.message;
+    //     }
+    //   },
+    // },
     {
       id: "2",
       name: "Pay with PayPal",
@@ -55,23 +55,23 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
         }
       },
     },
-    {
-      id: "3",
-      name: "Pay with PelPay",
-      description: "Pay with your Pelpay account",
-      icon: "/Pelpay.jpeg",
-      onClick: async () => {
-        const pay = await PayWithPelPay({
-          descriptions: courseId,
-          token,
-          user,
-        });
-        console.log(`pelpay`, pay);
-        if (pay.status === true) {
-          window.location.href = pay.message;
-        }
-      },
-    },
+    // {
+    //   id: "3",
+    //   name: "Pay with PelPay",
+    //   description: "Pay with your Pelpay account",
+    //   icon: "/Pelpay.jpeg",
+    //   onClick: async () => {
+    //     const pay = await PayWithPelPay({
+    //       descriptions: courseId,
+    //       token,
+    //       user,
+    //     });
+    //     console.log(`pelpay`, pay);
+    //     if (pay.status === true) {
+    //       window.location.href = pay.message;
+    //     }
+    //   },
+    // },
   ];
 
   return (

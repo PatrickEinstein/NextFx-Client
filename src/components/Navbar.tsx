@@ -125,9 +125,11 @@ export const Navbar = () => {
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
               /> */}
+              <Link href={"/"}>
               <span className="text-xl font-bold tracking-tighter">
                 Learn Forex
               </span>
+              </Link>
             </a>
             <button
               type="button"

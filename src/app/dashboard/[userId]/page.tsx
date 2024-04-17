@@ -36,18 +36,20 @@ const DashboardPage = () => {
     const currentUser = await GetUserById(token, userId);
     setCurrentUser(currentUser.message);
     setRegisteredCourses(regs.courses);
-  }, []);
+  }, [token,currentUser]);
 
-  const viewCourse = async (courseId: string) => {
+  const viewCourse = useCallback(async (courseId: string) => {
     const load = {
       courseId: courseId,
       token,
     };
     const actualCourse = await GetChaptersByCourseID(load);
+
+    console.log({actualCourse})
     router.push(
-      `/courses/${actualCourse.message.id}/chapters/${actualCourse.message.chapters[0]._id}`
+      `/courses/${actualCourse.message.id}/chapters/${actualCourse.message.chapters[0]?._id}`
     );
-  };
+  }, []);
 
   useEffect(() => {
     Courses();
