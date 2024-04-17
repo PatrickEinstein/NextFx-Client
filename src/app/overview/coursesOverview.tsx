@@ -45,6 +45,10 @@ const CoursesListOverview = () => {
           router.push("/login");
           return;
         }
+        var Exist: any = fullCourse.find(
+          (obj: any) => (obj.title = chapters.message.title)
+        );
+
         setFullCourse((prevState) => [...prevState, chapters.message]);
       }
     } catch (error) {
@@ -60,7 +64,7 @@ const CoursesListOverview = () => {
   return (
     <div className="w-full max-w-7xl px-5 md:px-0 mx-auto">
       {fullCourse.map(({ chapters, title, description, id }, index) => {
-        console.log(`chapters`, chapters);
+        // console.log(`chapters`, chapters);
         return (
           title !== "test" && (
             <CourseSchemeBox

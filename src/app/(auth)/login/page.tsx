@@ -40,18 +40,20 @@ const LoginPage = () => {
   const onLogin = useCallback(async () => {
     setLoading(true);
     const login = await Login(userInfo);
+    console.log(login);
     if (login.status === true) {
-      // sessionStorage.setItem("token", login.response);
-      // sessionStorage.setItem("user", login.user);
-      updateToken(login.response);
-      updateUser(login.user);
-
-      setLoading(false);
-      toast({
-        title: "Login Successful",
-        description: "Redirecting to the user dashboard",
-      });
-      router.push("/dashboard");
+      if (login.link) {
+        router.push(`${login.link}`);
+      } else {
+        updateToken(login.response);
+        updateUser(login.user);
+        setLoading(false);
+        toast({
+          title: "Login Successful",
+          description: "Redirecting to the user dashboard",
+        });
+        router.push("/dashboard");
+      }
     } else {
       // console.log(login);
       // const res = JSON.parse(login);

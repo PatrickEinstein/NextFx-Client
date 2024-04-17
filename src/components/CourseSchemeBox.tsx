@@ -104,19 +104,22 @@ const CourseSchemeBox = ({
                       user
                     );
                     const check = findIfRegistered.courses.find(
-                      (object: any) =>
-                        object._id == course[Number(indexNum)]?.courseId
+                      (object: any) => object._id == id
+                      // (object: any) => object._id == course[Number(indexNum)]?.courseId
                     );
                     if (check) {
-                      router.push(`/courses/${courseId}/chapters/${_id}`);
-                    } else {
-                      console.log(
-                        `playChpId`,
-                        course[Number(indexNum)]?.courseId
-                      );
                       router.push(
-                        `/enroll/${course[Number(indexNum)]?.courseId}`
+                        `/courses/${id}/chapters/${
+                          course[Number(indexNum)]?._id
+                        }`
                       );
+                      // `/courses/${course[Number(indexNum)]?.courseId}/chapters/${
+                      //   course[Number(indexNum)]?._id
+                      // }`
+                    } else {
+                      // console.log({ cid: course[Number(indexNum)] });
+                      router.push(`/enroll/${id}`);
+                      // router.push(`/enroll/${course[Number(indexNum)]?.courseId}`);
                     }
                   }}
                 />
