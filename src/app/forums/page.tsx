@@ -22,7 +22,7 @@ const TestPage = () => {
   let load = {
     page: 1,
     pageSize: 10,
-    token
+    token,
   };
   const ForumGot = useCallback(async () => {
     const newForum = await Threads(load);
@@ -65,7 +65,7 @@ const TestPage = () => {
   return (
     <div className="px-5 w-full pb-9">
       {/* <Banner variant="success" label="See updated topics" /> */}
-      <div className="w-full flex flex-col md:flex-row gap-5">
+      <div className="w-full flex flex-col lg:flex-row gap-5">
         <div className="w-full flex flex-col gap-3">
           {forum.map((category, index) => (
             <div
@@ -89,7 +89,7 @@ const TestPage = () => {
                         `/forums/c/${category.forum.title
                           .toLowerCase()
                           .split(" ")
-                          .join("-")}`  
+                          .join("-")}`
                       );
                     }}
                   >
