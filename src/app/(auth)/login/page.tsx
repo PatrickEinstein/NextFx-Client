@@ -42,9 +42,9 @@ const LoginPage = () => {
     const login = await Login(userInfo);
     console.log(login);
     if (login.status === true) {
-      // if (login.link) {
-      //   router.push(`${login.link}`);
-      // } else {
+      if (login.link) {
+        router.push(`${login.link}`);
+      } else {
         updateToken(login.response);
         updateUser(login.user);
         setLoading(false);
@@ -53,7 +53,7 @@ const LoginPage = () => {
           description: "Redirecting to the user dashboard",
         });
         router.push("/dashboard");
-      // }
+      }
     } else {
       // console.log(login);
       // const res = JSON.parse(login);
