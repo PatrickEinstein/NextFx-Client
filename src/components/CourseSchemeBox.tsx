@@ -39,7 +39,7 @@ const CourseSchemeBox = ({
   // console.log({ cid:id , indexNum, course });
 
   const onViewCourseOrPayFirst = async () => {
-    console.log({ token, user });
+    console.log(course.length);
 
     if (!user || !token) {
       router.push("/login");
@@ -69,7 +69,7 @@ const CourseSchemeBox = ({
         <Image src={school_badge} alt="school badge" className="h-[400px]" />
         <div className="flex flex-col gap-3 items-start">
           <p className="text-sm font-normal">
-            Course {Number(indexNum) + Number(0)} of {Number(total)}
+            Course {Number(indexNum) + Number(0)} of {Number(total) - 1}
           </p>
           <h2 className="text-2xl font-bold">{level}</h2>
           <span className="text-base">{description}</span>
@@ -85,11 +85,12 @@ const CourseSchemeBox = ({
       <div className="flex flex-col md:flex-row items-start py-6 w-full">
         <div className="w-full flex flex-col gap-2">
           <h2 className="text-xl font-bold">Your Progress</h2>
-          <p>0 of 4 Lessons Completed</p>
+          <p>0 of {Number(course.length)} Lessons Completed</p>
           <div className="rounded-2xl bg-gray-200 h-2 md:max-w-[60%]" />
         </div>
         <div className="w-full">
           <h2 className="text-xl font-bold mb-4">Course Outline</h2>
+          <h3>{Number(course.length)} chapters </h3>
           {course?.map(({ title, courseId, _id }, index) => (
             <div key={index} className="flex flex-row gap-4">
               <div className="flex items-center justify-center flex-col">
