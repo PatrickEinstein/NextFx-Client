@@ -22,12 +22,10 @@ const AuthPages = ({ children }: AuthPagesProps) => {
       redirect("/dashboard");
     }
   }, [path]);
-  function SearchBarFallback() {
-    return <>...</>;
-  }
+
 
   return (
-    <Suspense fallback={<SearchBarFallback />}>
+ 
       <div className="h-full w-full">
         <Navbar />
 
@@ -49,7 +47,7 @@ const AuthPages = ({ children }: AuthPagesProps) => {
           </div>
         </main>
       </div>
-    </Suspense>
+ 
   );
 };
 
