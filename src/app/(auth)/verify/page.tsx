@@ -5,11 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState, Suspense } from "react";
 import { Login, VerifyToken } from "../../../../utils/fetches/api.fetch";
-import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserStore } from "@/store";
+import CustomInputOtp from "./_components/CustomInputOtp";
 import {
   InputOTP,
   InputOTPGroup,
@@ -20,6 +20,41 @@ interface UserInfo {
   email: string;
   password: string;
 }
+
+const FallbackComponent = () => {
+  return (
+    <div className="flex items-center justify-center flex-col gap-[20px] pt-[28px] w-full">
+      <InputOTP
+        maxLength={6}
+        className="w-full flex items-center justify-center gap-3"
+      >
+        <InputOTPGroup className="!border-primary">
+          <InputOTPSlot index={0} />
+        </InputOTPGroup>
+        <InputOTPGroup>
+          <InputOTPSlot index={1} />
+        </InputOTPGroup>
+        <InputOTPGroup>
+          <InputOTPSlot index={2} />
+        </InputOTPGroup>
+        <InputOTPGroup>
+          <InputOTPSlot index={3} />
+        </InputOTPGroup>
+      </InputOTP>
+      {/*Button section*/}
+      <div className="w-full flex flex-col gap-2">
+        <button
+          className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
+          onClick={() => {}}
+          type="button"
+          disabled={true}
+        >
+          <span>Verify</span>
+        </button>
+      </div>
+    </div>
+  );
+};
 const VerifyPage = () => {
   // {
   //   params,
@@ -30,7 +65,6 @@ const VerifyPage = () => {
   // }
   const router = useRouter();
   const searchParams = useSearchParams();
-  const auth = searchParams.get("auth") || "";
   // console.log(`auth==>`, auth);
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -88,18 +122,6 @@ const VerifyPage = () => {
 
   const [otpInput, setOtpInput] = useState<string>("");
 
-  const VerifyOtp = async () => {
-    const res = await VerifyToken(otpInput, auth);
-    if (res.link) {
-      router.push(res.link);
-    } else {
-      toast({
-        title: "Verification Failed",
-        description: res.response,
-      });
-    }
-  };
-
   return (
     <div className="h-full w-full flex items-center justify-center ">
       <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
@@ -113,41 +135,9 @@ const VerifyPage = () => {
         </div>
 
         {/*Form*/}
-        <div className="flex items-center justify-center flex-col gap-[20px] pt-[28px] w-full">
-          <InputOTP
-            maxLength={6}
-            value={otpInput}
-            className="w-full flex items-center justify-center gap-3"
-            onChange={(value) => setOtpInput(value)}
-          >
-            <InputOTPGroup className="!border-primary">
-              <InputOTPSlot index={0} />
-            </InputOTPGroup>
-            <InputOTPGroup>
-              <InputOTPSlot index={1} />
-            </InputOTPGroup>
-            <InputOTPGroup>
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-            </InputOTPGroup>
-          </InputOTP>
-          {/*Button section*/}
-          <div className="w-full flex flex-col gap-2">
-            <button
-              className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
-              onClick={VerifyOtp}
-              type="button"
-              disabled={loading}
-            >
-              {loading && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin text-white" />
-              )}
-              <span>Verify</span>
-            </button>
-          </div>
-        </div>
+        <Suspense fallback={<FallbackComponent />}>
+          <CustomInputOtp />
+        </Suspense>
       </div>
     </div>
   );
