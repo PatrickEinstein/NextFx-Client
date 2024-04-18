@@ -30,7 +30,7 @@ const VerifyPage = ({
   const router = useRouter();
 
   const { auth } = searchParams;
-  // console.log(`searchParams==>`, auth);
+  console.log(`searchParams==>`, searchParams);
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: "",
