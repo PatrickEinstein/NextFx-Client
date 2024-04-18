@@ -1,21 +1,37 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import { ChangeEvent, useCallback, useState } from "react";
-import { Login } from "../../../../utils/fetches/api.fetch";
+import { Login, VerifyToken } from "../../../../utils/fetches/api.fetch";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserStore } from "@/store";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 
 interface UserInfo {
   email: string;
   password: string;
 }
-const VerifyPage = () => {
+const VerifyPage = ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams?: { searchParams: { auth: string } };
+}) => {
+  const router = useRouter();
+
+  const { auth } = searchParams;
+  // console.log(`searchParams==>`, auth);
+
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: "",
     password: "",
@@ -69,7 +85,19 @@ const VerifyPage = () => {
     }
   }, [userInfo]);
 
-  const router = useRouter();
+  const [otpInput, setOtpInput] = useState<string>("");
+
+  const VerifyOtp = async () => {
+    const res = await VerifyToken(otpInput, auth);
+    if (res.link) {
+      router.push(res.link);
+    } else {
+      toast({
+        title: "Verification Failed",
+        description: res.response,
+      });
+    }
+  };
 
   return (
     <div className="h-full w-full flex items-center justify-center ">
@@ -84,12 +112,31 @@ const VerifyPage = () => {
         </div>
 
         {/*Form*/}
-        <div className="flex items-start flex-col gap-[20px] pt-[28px] w-full">
+        <div className="flex items-center justify-center flex-col gap-[20px] pt-[28px] w-full">
+          <InputOTP
+            maxLength={6}
+            value={otpInput}
+            className="w-full flex items-center justify-center gap-3"
+            onChange={(value) => setOtpInput(value)}
+          >
+            <InputOTPGroup className="!border-primary">
+              <InputOTPSlot index={0} />
+            </InputOTPGroup>
+            <InputOTPGroup>
+              <InputOTPSlot index={1} />
+            </InputOTPGroup>
+            <InputOTPGroup>
+              <InputOTPSlot index={2} />
+            </InputOTPGroup>
+            <InputOTPGroup>
+              <InputOTPSlot index={3} />
+            </InputOTPGroup>
+          </InputOTP>
           {/*Button section*/}
           <div className="w-full flex flex-col gap-2">
             <button
               className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
-              onClick={onLogin}
+              onClick={VerifyOtp}
               type="button"
               disabled={loading}
             >

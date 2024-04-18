@@ -314,3 +314,13 @@ export const GetGlossary = async (params: string) => {
   );
   return res;
 };
+
+export const VerifyToken = async (otp: string, user: string) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/verify-otp?user=${user}&otp=${otp}`,
+    {
+      "Content-Type": "application/json",
+    }
+  );
+  return res;
+};
