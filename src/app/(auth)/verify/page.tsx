@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -58,8 +58,6 @@ const FallbackComponent = () => {
 };
 const VerifyPage = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  // console.log(`auth==>`, auth);
 
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
