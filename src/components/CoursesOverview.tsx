@@ -1,20 +1,29 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { CoursesBox } from "./CoursesBox";
-import { Courses, GetSomeCHapters } from "../../utils/fetches/api.fetch";
+import {
+  Courses,
+  GetSomeCHapters,
+  FetchUserRegisteredCourses,
+} from "../../utils/fetches/api.fetch";
 import Link from "next/link";
+import { useUserStore } from "@/store";
 
 export const CoursesOverview = () => {
+  const router = useRouter();
+  const token = useUserStore((state) => state.token);
+  const user = useUserStore((state) => state.user);
+
   const [forexCourses, SetCourses] = useState([]);
   const coursesTodisplay = forexCourses?.slice(0, 4);
   const load = {
     page: 1,
     pageSize: 10,
+    token,
   };
   const newsGot = useCallback(async () => {
     const newNews = await GetSomeCHapters(load);
-    console.log(`someChapters==>`, newNews);
-
     if (newNews?.message === "Failed to fetch") {
       return;
     }
@@ -24,6 +33,19 @@ export const CoursesOverview = () => {
   useEffect(() => {
     newsGot();
   }, []);
+
+  const onViewCourseOrPayFirst = async (courseId: string, _id: string) => {
+    const findIfRegistered = await FetchUserRegisteredCourses(token, user);
+    const check = findIfRegistered.courses.find(
+      (object: any) => object._id == courseId
+    );
+    // console.log({ findIfRegistered, check });
+    if (check) {
+      router.push(`/courses/${courseId}/chapters/${_id}`);
+    } else {
+      router.push(`/enroll/${courseId}`);
+    }
+  };
 
   return (
     <div className="w-full py-10 px-4 md:px-0">
@@ -42,6 +64,7 @@ export const CoursesOverview = () => {
           <button
             className="bg-primary text-white rounded-[30px] py-3 px-4"
             type="button"
+            onClick={() => router.push("/overview")}
           >
             All Courses
           </button>
@@ -63,24 +86,30 @@ export const CoursesOverview = () => {
                 courseTitle,
               },
               index
-            ) => (
-              <div key={index}>
-                <Link href={`/courses/${courseId}/chapters/${_id}`}>
-                  <CoursesBox
-                    name={title}
-                    description={description}
-                    video={link}
-                    script={script}
-                    createdAt={createdAt}
-                    updatedAt={updatedAt}
-                    courseTitle={courseTitle}
-                    // price={course.price}
-                    // duration={course.duration}
-                    // students={course.students}
-                  />
-                </Link>
-              </div>
-            )
+            ) =>
+              courseId != undefined && (
+                <div key={index}>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => {
+                      onViewCourseOrPayFirst(courseId, _id);
+                    }}
+                  >
+                    <CoursesBox
+                      name={title}
+                      description={description}
+                      video={link}
+                      script={script}
+                      createdAt={createdAt}
+                      updatedAt={updatedAt}
+                      courseTitle={courseTitle}
+                      // price={course.price}
+                      // duration={course.duration}
+                      // students={course.students}
+                    />
+                  </div>
+                </div>
+              )
           )}
         </div>
       </div>

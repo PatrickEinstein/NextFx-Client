@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 // import React from "react";
-'use client';
+"use client";
 
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ const navigation = {
     { name: "Insights", href: "#" },
   ],
   support: [
-    { name: "Pricing", href: "#" },
+    { name: "Pricing", href: "/pay" },
     { name: "Documentation", href: "#" },
     { name: "Guides", href: "#" },
     { name: "API Status", href: "#" },

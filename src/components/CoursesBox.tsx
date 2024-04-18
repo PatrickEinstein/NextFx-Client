@@ -29,11 +29,11 @@ export const CoursesBox = ({
   return (
     <div className="px-4 py-6 rounded-[20px] border border-[#142C44] bg-[#fff] md:h-80">
       <div className="w-full flex flex-col gap-5">
-        <h3 className="text-2xl text-primary font-semibold font-secularOne md:h-10">
+        <h3 className="text-2xl text-primary font-semibold font-secularOne  ">
           Course Title: {courseTitle}
         </h3>
-        <h3 className="text-1xl text-primary font-semibold font-secularOne md:h-10">
-          CHapter : {name}
+        <h3 className="text-1xl text-primary font-semibold font-secularOne text-wrap md:h-20">
+          Chapter : {name}
         </h3>
 
         <div className="flex flex-row items-center justify-between text-primary">
@@ -47,9 +47,7 @@ export const CoursesBox = ({
             : description}
         </span>
         <div className="w-full flex flex-row justify-between">
-          {/* <span className="text-base text-primary font-semibold">${price}</span> */}
-
-          <Image src={Cart} alt="cart" />
+          {/* <Image src={Cart} alt="cart" /> */}
         </div>
       </div>
     </div>

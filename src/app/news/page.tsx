@@ -8,14 +8,17 @@ import Footer from "@/components/NewFooter";
 import { Navbar } from "@/components";
 import { AnalysisHero } from "../analysis/_components/AnalysisHero";
 import { AnalysisSkeleton } from "../analysis/_components/AnalysisSkeleton";
+import { useUserStore } from "@/store";
 
 const NEWS = () => {
+  const token = useUserStore((state) => state.token);
   const [news, SetNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   let load = {
     page: 1,
     pageSize: 10,
+    token,
   };
   const newsGot = useCallback(async () => {
     setLoading(true);

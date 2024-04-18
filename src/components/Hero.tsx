@@ -3,13 +3,14 @@
 import React from "react";
 import Logo from "../../public/HeroPic.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Hero = () => {
   return (
     <div className=" bg-secondary justify-center align-middle py-[40px] lg:py-[90px] px-5 bg-heroImg">
       <div className="max-w-7xl mx-auto w-full">
         <div className="w-full flex flex-col md:flex-row pt-10 justify-center">
-          <div className="w-1/2 text-primary">
+          <div className="w-full lg:w-1/2 text-primary">
             <h3 className="font-bold text-5xl lg:text-7xl leading-[80px] pb-4 ">
               Are you Interested in Learning Forex?
             </h3>
@@ -18,10 +19,10 @@ export const Hero = () => {
               complete beginner&apos;s guide to forex trading.
             </h3>
             <button className="h-12 w-40 rounded-3xl bg-primary font-bold text-white">
-              Get Started
+              <Link href="/overview">Get Started</Link>
             </button>
           </div>
-          <div className="w-1/2">
+          <div className="w-full lg:w-1/2">
             <Image src={Logo} alt="Logo" className="h-[400px]" />
           </div>
         </div>
