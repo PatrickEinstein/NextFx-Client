@@ -20,17 +20,18 @@ interface UserInfo {
   email: string;
   password: string;
 }
-const VerifyPage = ({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams?: { searchParams: { auth: string } };
-}) => {
+const VerifyPage = () => {
+  // {
+  //   params,
+  //   searchParams,
+  // }: {
+  //   params: { slug: string };
+  //   searchParams?: { searchParams: { auth: string } };
+  // }
   const router = useRouter();
-
-  const { auth } = searchParams;
-  console.log(`searchParams==>`, searchParams);
+  const searchParams = useSearchParams();
+  const auth = searchParams.get("auth");
+  // console.log(`auth==>`, auth);
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: "",
