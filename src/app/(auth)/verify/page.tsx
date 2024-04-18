@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import { ChangeEvent, useCallback, useState, Suspense } from "react";
+
 import { Login, VerifyToken } from "../../../../utils/fetches/api.fetch";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserStore } from "@/store";
@@ -56,74 +57,19 @@ const FallbackComponent = () => {
   );
 };
 const VerifyPage = () => {
-  // {
-  //   params,
-  //   searchParams,
-  // }: {
-  //   params: { slug: string };
-  //   searchParams?: { searchParams: { auth: string } };
-  // }
+
   const router = useRouter();
   const searchParams = useSearchParams();
   // console.log(`auth==>`, auth);
 
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    email: "",
-    password: "",
-  });
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const updateToken = useUserStore((state) => state.updateToken);
-  const updateUser = useUserStore((state) => state.updateUser);
-
-  const onSetUserInfo = (
-    e: ChangeEvent<HTMLInputElement>,
-    fieldName: keyof UserInfo
-  ) => {
-    const value = e.target.value;
-    setUserInfo((prev) => ({
-      ...prev,
-      [fieldName]: value,
-    }));
-  };
-
-  const onLogin = useCallback(async () => {
-    setLoading(true);
-    const login = await Login(userInfo);
-    if (login.status === true) {
-      // sessionStorage.setItem("token", login.response);
-      // sessionStorage.setItem("user", login.user);
-      updateToken(login.response);
-      updateUser(login.user);
-
-      setLoading(false);
-      toast({
-        title: "Login Successful",
-        description: "Redirecting to the user dashboard",
-      });
-      router.push("/dashboard");
-    } else {
-      // console.log(login);
-      // const res = JSON.parse(login);
-      // const message = res.substring(res.indexOf(":") + 1);
-      // console.log(res, message);
-      // alert(JSON.parse(res.substring(res.indexOf(":") + 1)));
-      const response = "Invalid Email or Password";
-      // const response = JSON.parse(login.response);
-      toast({
-        variant: "destructive",
-        title: "An Error occurred",
-        description: response,
-      });
-      setLoading(false);
-    }
-  }, [userInfo]);
-
   const [otpInput, setOtpInput] = useState<string>("");
 
+
   return (
-    <div className="h-full w-full flex items-center justify-center ">
+<div className="h-full w-full flex items-center justify-center ">
       <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
         <div className="flex items-start flex-col gap-6">
           <h2 className="text-[36px] font-medium tracking-[1.44px]">
@@ -132,14 +78,14 @@ const VerifyPage = () => {
           <p className="text-[16px] text-gray-500">
             Please enter the verification code sent to your email address.
           </p>
-        </div>
-
+          
         {/*Form*/}
         <Suspense fallback={<FallbackComponent />}>
           <CustomInputOtp />
         </Suspense>
+
       </div>
-    </div>
+
   );
 };
 
