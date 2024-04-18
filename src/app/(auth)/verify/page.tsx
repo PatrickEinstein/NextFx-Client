@@ -43,49 +43,6 @@ const VerifyPage = () => {
   const updateToken = useUserStore((state) => state.updateToken);
   const updateUser = useUserStore((state) => state.updateUser);
 
-  const onSetUserInfo = (
-    e: ChangeEvent<HTMLInputElement>,
-    fieldName: keyof UserInfo
-  ) => {
-    const value = e.target.value;
-    setUserInfo((prev) => ({
-      ...prev,
-      [fieldName]: value,
-    }));
-  };
-
-  const onLogin = useCallback(async () => {
-    setLoading(true);
-    const login = await Login(userInfo);
-    if (login.status === true) {
-      // sessionStorage.setItem("token", login.response);
-      // sessionStorage.setItem("user", login.user);
-      updateToken(login.response);
-      updateUser(login.user);
-
-      setLoading(false);
-      toast({
-        title: "Login Successful",
-        description: "Redirecting to the user dashboard",
-      });
-      router.push("/dashboard");
-    } else {
-      // console.log(login);
-      // const res = JSON.parse(login);
-      // const message = res.substring(res.indexOf(":") + 1);
-      // console.log(res, message);
-      // alert(JSON.parse(res.substring(res.indexOf(":") + 1)));
-      const response = "Invalid Email or Password";
-      // const response = JSON.parse(login.response);
-      toast({
-        variant: "destructive",
-        title: "An Error occurred",
-        description: response,
-      });
-      setLoading(false);
-    }
-  }, [userInfo]);
-
   const [otpInput, setOtpInput] = useState<string>("");
 
   const VerifyOtp = async () => {
