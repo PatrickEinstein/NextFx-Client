@@ -74,10 +74,10 @@ const RegisterPage = () => {
       router.push("/login");
     } else {
       setLoading(false);
-      const response = JSON.parse(reg.message);
+      // const response = reg.message;
       toast({
         variant: "destructive",
-        description: response.message,
+        description: reg.response || reg.message,
       });
       // alert(reg.message);
     }
@@ -126,6 +126,7 @@ const RegisterPage = () => {
                 name="dateOfBirth"
                 type="date"
                 onChange={(e) => onSetUserInfo(e, "DateOfBirth")}
+                defaultValue="00/00/0000"
               />
             </div>
             <div className="flex flex-col items-start gap-2 w-full">
@@ -135,6 +136,7 @@ const RegisterPage = () => {
                 value={userExperience}
                 onChange={handleUserExperienceChange}
               >
+                <option value=""></option>
                 <option value="Novice">Less than a year</option>
                 <option value="Amateur">1 year</option>
                 <option value="Beginner">2 years</option>

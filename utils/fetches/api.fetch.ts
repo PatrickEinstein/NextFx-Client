@@ -4,7 +4,7 @@ import { useUserStore } from "@/store";
 import { HttpGetCallerWhole, HttpOTHERcaller } from "../index";
 
 // const baseUrl = "http://localhost:5000";
- const baseUrl = "https://forexserver.onrender.com";
+const baseUrl = "https://forexserver.onrender.com";
 
 export const CalendarNews = async () => {
   const res = await HttpGetCallerWhole(
@@ -302,6 +302,24 @@ export const FetchTransactionStatus = async (
     {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
+    }
+  );
+  return res;
+};
+
+export const GetGlossary = async (params: string) => {
+  const res = await HttpGetCallerWhole(
+    `https://www.babypips.com/forexpedia/${params}.json`,
+    {}
+  );
+  return res;
+};
+
+export const VerifyToken = async (otp: string, user: string) => {
+  const res = await HttpGetCallerWhole(
+    `${baseUrl}/verify-otp?user=${user}&otp=${otp}`,
+    {
+      "Content-Type": "application/json",
     }
   );
   return res;

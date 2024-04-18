@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { coursesList } from "../../../constants";
 import CourseSchemeBox from "@/components/CourseSchemeBox";
 import {
@@ -20,17 +20,21 @@ const CoursesListOverview = () => {
     token,
   };
 
-  const [fullCourse, setFullCourse] = useState([
-    {
-      title: "test",
-      description: "test",
-      id: "",
-      chapters: [],
-    },
-  ]);
+  const init = useMemo(
+    () => [
+      {
+        title: "test",
+        description: "test",
+        id: "",
+        chapters: [],
+      },
+    ],
+    []
+  );
+  const [fullCourse, setFullCourse] = useState(init);
   const total = fullCourse.length || 0;
 
-  console.log({ fullCourse });
+  // console.log({ fullCourse });
 
   const FindAvailableCourses = useCallback(async () => {
     try {
@@ -66,7 +70,8 @@ const CoursesListOverview = () => {
       {fullCourse.map(({ chapters, title, description, id }, index) => {
         // console.log(`chapters`, chapters);
         return (
-          title !== "test" && (
+          title !== "test" &&
+          description !== "test" && (
             <CourseSchemeBox
               description={description}
               course={chapters}
