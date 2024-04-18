@@ -21,22 +21,12 @@ interface UserInfo {
   password: string;
 }
 const VerifyPage = () => {
-  // {
-  //   params,
-  //   searchParams,
-  // }: {
-  //   params: { slug: string };
-  //   searchParams?: { searchParams: { auth: string } };
-  // }
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const auth = searchParams.get("auth") || "";
   // console.log(`auth==>`, auth);
 
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    email: "",
-    password: "",
-  });
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
@@ -57,12 +47,10 @@ const VerifyPage = () => {
     }
   };
 
-  function SearchBarFallback() {
-    return <>...</>;
-  }
+
 
   return (
-    <Suspense fallback={<SearchBarFallback />}>
+
       <div className="h-full w-full flex items-center justify-center ">
         <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
           <div className="flex items-start flex-col gap-6">
@@ -112,7 +100,7 @@ const VerifyPage = () => {
           </div>
         </div>
       </div>
-    </Suspense>
+
   );
 };
 
