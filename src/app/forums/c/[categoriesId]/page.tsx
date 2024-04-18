@@ -2,6 +2,7 @@
 
 import { Separator } from "@/components/ui/separator";
 import { TableComponent } from "./_components/TableComponent";
+import { usePathname } from "next/navigation";
 
 type categoriesType = {};
 
@@ -43,7 +44,7 @@ const CategoriesPage = () => {
 
   return (
     <div className="w-full flex flex-col  px-5 lg:px-8">
-      {/*Header Section*/}
+      {/* Header Section
       <div className="w-full flex flex-col">
         <div className="grid grid-cols-4 gap-8 py-2">
           <h4 className="col-span-3 text-base font-bold text-gray-400">
@@ -59,13 +60,11 @@ const CategoriesPage = () => {
           orientation="horizontal"
           className="w-full h-[3px] bg-gray-300"
         />
-      </div>
+      </div> */}
 
       {/*Categories Section*/}
-      
 
-        <TableComponent categories={categories} />
-      
+      <TableComponent categories={categories} />
     </div>
   );
 };
