@@ -40,16 +40,16 @@ const VerifyPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const updateToken = useUserStore((state) => state.updateToken);
-  const updateUser = useUserStore((state) => state.updateUser);
-
   const [otpInput, setOtpInput] = useState<string>("");
 
   const VerifyOtp = async () => {
     const res = await VerifyToken(otpInput, auth);
+    setLoading(true);
     if (res.link) {
       router.push(res.link);
+      setLoading(false);
     } else {
+      setLoading(false);
       toast({
         title: "Verification Failed",
         description: res.response,
