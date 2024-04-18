@@ -57,7 +57,6 @@ const FallbackComponent = () => {
   );
 };
 const VerifyPage = () => {
-
   const router = useRouter();
   const searchParams = useSearchParams();
   // console.log(`auth==>`, auth);
@@ -67,9 +66,8 @@ const VerifyPage = () => {
 
   const [otpInput, setOtpInput] = useState<string>("");
 
-
   return (
-<div className="h-full w-full flex items-center justify-center ">
+    <div className="h-full w-full flex items-center justify-center ">
       <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
         <div className="flex items-start flex-col gap-6">
           <h2 className="text-[36px] font-medium tracking-[1.44px]">
@@ -78,14 +76,14 @@ const VerifyPage = () => {
           <p className="text-[16px] text-gray-500">
             Please enter the verification code sent to your email address.
           </p>
-          
-        {/*Form*/}
-        <Suspense fallback={<FallbackComponent />}>
-          <CustomInputOtp />
-        </Suspense>
 
+          {/*Form*/}
+          <Suspense fallback={<FallbackComponent />}>
+            <CustomInputOtp />
+          </Suspense>
+        </div>
       </div>
-
+    </div>
   );
 };
 
