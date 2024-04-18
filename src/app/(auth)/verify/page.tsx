@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, Suspense, useCallback, useState } from "react";
 import { Login, VerifyToken } from "../../../../utils/fetches/api.fetch";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
@@ -57,56 +57,62 @@ const VerifyPage = () => {
     }
   };
 
-  return (
-    <div className="h-full w-full flex items-center justify-center ">
-      <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
-        <div className="flex items-start flex-col gap-6">
-          <h2 className="text-[36px] font-medium tracking-[1.44px]">
-            Verify your Email address
-          </h2>
-          <p className="text-[16px] text-gray-500">
-            Please enter the verification code sent to your email address.
-          </p>
-        </div>
+  function SearchBarFallback() {
+    return <>...</>;
+  }
 
-        {/*Form*/}
-        <div className="flex items-center justify-center flex-col gap-[20px] pt-[28px] w-full">
-          <InputOTP
-            maxLength={6}
-            value={otpInput}
-            className="w-full flex items-center justify-center gap-3"
-            onChange={(value) => setOtpInput(value)}
-          >
-            <InputOTPGroup className="!border-primary">
-              <InputOTPSlot index={0} />
-            </InputOTPGroup>
-            <InputOTPGroup>
-              <InputOTPSlot index={1} />
-            </InputOTPGroup>
-            <InputOTPGroup>
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-            </InputOTPGroup>
-          </InputOTP>
-          {/*Button section*/}
-          <div className="w-full flex flex-col gap-2">
-            <button
-              className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
-              onClick={VerifyOtp}
-              type="button"
-              disabled={loading}
+  return (
+    <Suspense fallback={<SearchBarFallback />}>
+      <div className="h-full w-full flex items-center justify-center ">
+        <div className="flex items-start flex-col py-6 px-8 bg-white shadow-lg border border-gray-300">
+          <div className="flex items-start flex-col gap-6">
+            <h2 className="text-[36px] font-medium tracking-[1.44px]">
+              Verify your Email address
+            </h2>
+            <p className="text-[16px] text-gray-500">
+              Please enter the verification code sent to your email address.
+            </p>
+          </div>
+
+          {/*Form*/}
+          <div className="flex items-center justify-center flex-col gap-[20px] pt-[28px] w-full">
+            <InputOTP
+              maxLength={6}
+              value={otpInput}
+              className="w-full flex items-center justify-center gap-3"
+              onChange={(value) => setOtpInput(value)}
             >
-              {loading && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin text-white" />
-              )}
-              <span>Verify</span>
-            </button>
+              <InputOTPGroup className="!border-primary">
+                <InputOTPSlot index={0} />
+              </InputOTPGroup>
+              <InputOTPGroup>
+                <InputOTPSlot index={1} />
+              </InputOTPGroup>
+              <InputOTPGroup>
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+              </InputOTPGroup>
+            </InputOTP>
+            {/*Button section*/}
+            <div className="w-full flex flex-col gap-2">
+              <button
+                className="w-full flex items-center justify-center px-[30px] bg-primary text-white py-3 rounded-lg"
+                onClick={VerifyOtp}
+                type="button"
+                disabled={loading}
+              >
+                {loading && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin text-white" />
+                )}
+                <span>Verify</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
