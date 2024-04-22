@@ -54,6 +54,7 @@ export const ForumOverView = () => {
                 thread={description}
                 views={views}
                 replies={repliesNumber}
+                index={index}
               />
             </div>
           )
