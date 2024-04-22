@@ -6,6 +6,7 @@ type Props = {
   thread?: string;
   views?: number;
   replies?: number;
+  index?: number;
 };
 
 export const ForumBlogBox = ({
@@ -14,6 +15,7 @@ export const ForumBlogBox = ({
   thread,
   views,
   replies,
+  index,
 }: Props) => {
   return (
     <div className="flex items-start justify-start w-full py-2 px-4 gap-3">
@@ -38,7 +40,30 @@ export const ForumBlogBox = ({
         <h3 className="">
           Last post by{" "}
           <span className="text-yellow-500">
-            {lastAuthor} in {thread}
+            {index === 0
+              ? "Jeremy Thomas"
+              : index === 1
+              ? "Jane Clarkson"
+              : index === 2
+              ? "Gabriel Russell"
+              : index === 3
+              ? "Lindsay Walton"
+              : index === 4
+              ? "Shekinah"
+              : index === 5
+              ? "Mathew"
+              : index === 6
+              ? "Brian"
+              : index === 6
+              ? "Shane"
+              : index === 7
+              ? "Gatier"
+              : index === 8
+              ? "Makenzy"
+              : index === 9
+              ? "Grace Leo"
+              : "Jon Freeman"}{" "}
+            in {thread}
           </span>{" "}
         </h3>
         <h3>

@@ -111,7 +111,17 @@ export const New = () => {
                         {/* <a href={post.author.href}> */}
                         <a>
                           <span className="absolute inset-0" />
-                          PATRICK
+                          {index === 0
+                            ? "Jeremy Thomas"
+                            : index === 1
+                            ? "Jane Clarkson"
+                            : index === 2
+                            ? "Gabriel Russell"
+                            : index === 3
+                            ? "Lindsay Walton"
+                            : index === 4
+                            ? "Shekinah Arthur"
+                            : "Lindsay Walton"}
                         </a>
                       </p>
                       {/* <p className="text-gray-600">{post.author.role}</p> */}
