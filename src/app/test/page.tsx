@@ -19,7 +19,7 @@ async function fetchDiscuss() {
 
 export default async function Test() {
   const data = await fetchDiscuss();
-  console.log(data);
+  // console.log(data);
   // const [alpha, setAlpha] = useState<string>("a");
   // const [all, setAll] = useState([]);
 

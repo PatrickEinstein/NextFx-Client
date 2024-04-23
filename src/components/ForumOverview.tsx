@@ -15,7 +15,7 @@ export const ForumOverView = () => {
   };
   const ForumGot = useCallback(async () => {
     const newForum = await Threads(load);
-    console.log(`newForum==>`, newForum.message);
+    // console.log(`newForum==>`, newForum.message);
     if (newForum.message === "Failed to fetch") {
       return;
     }

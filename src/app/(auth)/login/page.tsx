@@ -40,7 +40,7 @@ const LoginPage = () => {
   const onLogin = useCallback(async () => {
     setLoading(true);
     const login = await Login(userInfo);
-    console.log(login);
+    // console.log(login);
     if (login.status === true) {
       if (login.link) {
         router.push(`${login.link}`);

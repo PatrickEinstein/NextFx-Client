@@ -49,7 +49,7 @@ export function SelectPaymentOption({ courseId }: SelectPaymentOptionProps) {
           token,
           user,
         });
-        console.log(`paypal`, pay);
+        // console.log(`paypal`, pay);
         if (pay.status === true) {
           window.location.href = pay.message;
         }

@@ -16,7 +16,7 @@ export const NewBlogs = () => {
   };
   const newsGot = useCallback(async () => {
     const newNews = await CurrencyNews(load);
-    console.log(`news==>`, newNews?.message);
+    // console.log(`news==>`, newNews?.message);
     SetNews(newNews?.message);
   }, []);
 

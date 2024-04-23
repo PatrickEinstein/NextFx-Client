@@ -26,7 +26,7 @@ const TestPage = () => {
   };
   const ForumGot = useCallback(async () => {
     const newForum = await Threads(load);
-    console.log(`ForunForums==>`, newForum.message);
+    // console.log(`ForunForums==>`, newForum.message);
     if (newForum.message === "Failed to fetch") {
       return;
     }

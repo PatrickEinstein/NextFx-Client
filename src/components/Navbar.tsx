@@ -22,7 +22,7 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // const [user, setUser] = useState<string | null>(null);
   const user = useUserStore((state) => state.user);
-  console.log(user);
+  // console.log(user);
   const isLoggedInUser = user === null ? false : true;
 
   // useEffect(() => {
@@ -126,9 +126,9 @@ export const Navbar = () => {
                 alt=""
               /> */}
               <Link href={"/"}>
-              <span className="text-xl font-bold tracking-tighter">
-                Learn Forex
-              </span>
+                <span className="text-xl font-bold tracking-tighter">
+                  Learn Forex
+                </span>
               </Link>
             </a>
             <button
