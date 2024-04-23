@@ -39,7 +39,7 @@ const CourseSchemeBox = ({
   // console.log({ cid:id , indexNum, course });
 
   const onViewCourseOrPayFirst = async () => {
-    console.log(course.length);
+    // console.log(course.length);
 
     if (!user || !token) {
       router.push("/login");
@@ -50,7 +50,7 @@ const CourseSchemeBox = ({
       (object: any) => object._id == id
       // (object: any) => object._id == course[Number(indexNum)]?.courseId
     );
-    console.log({ check });
+    // console.log({ check });
     if (check) {
       router.push(`/courses/${id}/chapters/${course[Number(indexNum)]?._id}`);
       // `/courses/${course[Number(indexNum)]?.courseId}/chapters/${

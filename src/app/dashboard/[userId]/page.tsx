@@ -36,7 +36,7 @@ const DashboardPage = () => {
     const currentUser = await GetUserById(token, userId);
     setCurrentUser(currentUser.message);
     setRegisteredCourses(regs.courses);
-  }, [token,currentUser]);
+  }, [token, currentUser]);
 
   const viewCourse = useCallback(async (courseId: string) => {
     const load = {
@@ -45,7 +45,7 @@ const DashboardPage = () => {
     };
     const actualCourse = await GetChaptersByCourseID(load);
 
-    console.log({actualCourse})
+    // console.log({actualCourse})
     router.push(
       `/courses/${actualCourse.message.id}/chapters/${actualCourse.message.chapters[0]?._id}`
     );

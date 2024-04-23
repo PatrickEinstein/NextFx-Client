@@ -28,7 +28,7 @@ const Items = [
   {
     title: "GLOSSARY",
     desc: "Forexpedia is the original online forex glossary made specifically for forex traders. Enhancing your trading vocabulary is crucial if you want to able to follow the financial markets. Not only can you use it as a reference, but it’ll help you sound really smart at parties.",
-    buttonLink: "learn",
+    buttonLink: "forexpedia",
     buttonName: "LEARN",
     image: glossary,
   },

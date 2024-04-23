@@ -16,7 +16,7 @@ async function fetchDiscuss(id: any) {
 
 export default async function Test({ params }: { params: any }) {
   const data = await fetchDiscuss(params.params);
-  console.log(data);
+  //   console.log(data);
   //   console.log(params.params);
 
   return (
